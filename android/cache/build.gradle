@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+
+
+archivesBaseName = 'android-cache'
+
+configurations {
+    compileClasspath
+}
+
+android {
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        compileSdkVersion buildConfig.targetSdk
+        multiDexEnabled = false
+    }
+
+    dexOptions {
+        preDexLibraries = false
+        dexInProcess = false
+        javaMaxHeapSize "4g"
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'            //Some libraries have issues with this.
+        disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
+        disable 'IconDensities'             //For testing purpose. This is safe to remove.
+        disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
+    }
+}
+
+dependencies {
+    api project(':common:data')
+    api project(':common:domain')
+
+    implementation deps.kotlin.stdlib.jdk
+    implementation deps.kotlin.coroutines.jdk
+    implementation deps.kotlin.coroutines.android
+    implementation deps.gson
+    implementation deps.ktor.core.jdk
+    implementation deps.ktor.utils.jdk
+    implementation deps.threeTen.jdk
+    implementation deps.kotlinLogging
+    implementation deps.ktor.utils.jdk
+
+    implementation deps.androidx.appCompat
+    implementation deps.okhttp.logging
+}

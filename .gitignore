@@ -1,0 +1,20 @@
+.gradle/
+build/
+local.properties
+
+# InteliJ
+.idea/
+*.iml
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+
+# maven
+target
+
+# generated API 
+proglibs
+
+#asciidoctor
+.asciidoctor

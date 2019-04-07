@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="twitter_blue">#55ACEE</color>
+    <color name="bg_info_header">#1f000000</color>
+    <color name="session_bg">#ffffffff</color>
+    <color name="session_finished_bg">#e1e1e1</color>
+    <color name="feedback_green">#008000</color>
+    <color name="feedback_yellow">#FFB13C</color>
+
+
+</resources>

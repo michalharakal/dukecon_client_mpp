@@ -1,0 +1,58 @@
+apply plugin: 'org.jetbrains.kotlin.multiplatform'
+
+archivesBaseName = 'common-presentation'
+
+// TODO work around https://youtrack.jetbrains.com/issue/KT-27170
+configurations {
+  compileClasspath
+}
+
+kotlin {
+  sourceSets {
+    commonMain {
+      dependencies {
+        api project(':common:domain')
+
+        api deps.kotlin.stdlib.common
+        api deps.kotlin.coroutines.common
+        api deps.ktor.core.common
+      }
+    }
+    commonTest {
+      dependencies {
+        implementation deps.kotlin.test.common
+        implementation deps.kotlin.test.annotations
+      }
+    }
+    jvmMain {
+      dependencies {
+        api deps.kotlin.stdlib.jdk
+        api deps.kotlin.coroutines.jdk
+        api deps.ktor.core.jdk
+      }
+    }
+    jvmTest {
+      dependencies {
+        implementation deps.kotlin.test.jdk
+      }
+    }
+    iosMain {
+      dependencies {
+        api project(':common:domain')
+        implementation deps.ktor.client.ios
+        implementation deps.ktor.core.ios
+        implementation deps.ktor.utils.ios
+      }
+    }
+  }
+
+  targets {    
+    final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
+                          ? presets.iosArm64 : presets.iosX64
+
+    fromPreset(iOSTarget, 'ios') {
+        compilations.main.outputKinds('FRAMEWORK')
+    }
+    fromPreset(presets.jvm, 'jvm')
+  }
+}

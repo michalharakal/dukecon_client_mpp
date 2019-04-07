@@ -1,0 +1,58 @@
+apply plugin: 'org.jetbrains.kotlin.multiplatform'
+
+archivesBaseName = 'common-data'
+
+// TODO work around https://youtrack.jetbrains.com/issue/KT-27170
+configurations {
+    compileClasspath
+}
+
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation deps.kotlin.stdlib.common
+                implementation deps.kotlin.coroutines.common
+                implementation deps.ktor.core.common
+                implementation deps.ktor.utils.common
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation deps.kotlin.test.common
+                implementation deps.kotlin.test.annotations
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation deps.kotlin.stdlib.jdk
+                implementation deps.kotlin.coroutines.jdk
+                implementation deps.ktor.core.jdk
+                implementation deps.ktor.utils.jdk
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation deps.kotlin.test.jdk
+            }
+        }
+
+        iosMain {
+            dependencies {
+                implementation deps.ktor.client.ios
+                implementation deps.ktor.core.ios
+                implementation deps.ktor.utils.ios
+            }
+        }
+    }
+
+    targets {
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
+                           ? presets.iosArm64 : presets.iosX64
+
+        fromPreset(iOSTarget, 'ios') {
+            compilations.main.outputKinds('FRAMEWORK')
+        }
+        fromPreset(presets.jvm, 'jvm')
+    }
+}
