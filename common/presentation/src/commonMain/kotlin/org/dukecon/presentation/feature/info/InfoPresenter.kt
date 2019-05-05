@@ -3,14 +3,16 @@ package org.dukecon.presentation.feature.info
 import kotlinx.coroutines.launch
 import org.dukecon.domain.repository.LibrariesRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 import org.dukecon.presentation.mapper.LibraryMapper
 import org.dukecon.presentation.model.LibraryView
 
-class InfoPresenter constructor(
+open class InfoPresenter constructor(
         val repository: LibrariesRepository,
         private val libraryMapper: LibraryMapper,
-        private val webNavigator: WebNavigator
-) : CoroutinePresenter<InfoContract.View>(), InfoContract.Presenter {
+        private val webNavigator: WebNavigator,
+        ioContextProvider:IoContextProvider
+) : CoroutinePresenter<InfoContract.View>(ioContextProvider), InfoContract.Presenter {
 
     override fun showError(error: Throwable) {
 

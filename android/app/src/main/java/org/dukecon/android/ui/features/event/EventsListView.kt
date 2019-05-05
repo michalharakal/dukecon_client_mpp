@@ -5,12 +5,12 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.ktor.util.date.GMTDate
 import org.dukecon.android.ui.ext.getComponent
 import org.dukecon.android.ui.features.main.MainComponent
 import org.dukecon.domain.features.time.CurrentTimeProvider
 import org.dukecon.presentation.feature.event.EventListContract
 import org.dukecon.presentation.model.EventView
-import org.threeten.bp.OffsetDateTime
 import javax.inject.Inject
 
 class EventsListView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
@@ -21,7 +21,7 @@ class EventsListView @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private val adapter: EventsAdapter
-    private var date: OffsetDateTime? = null
+    private var date: GMTDate? = null
 
     @Inject
     lateinit var presenter: EventListContract.Presenter
@@ -59,7 +59,7 @@ class EventsListView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private var showFavoritesOnly: Boolean = false;
 
-    fun setDate(date: OffsetDateTime, showFavoritesOnly: Boolean) {
+    fun setDate(date: GMTDate, showFavoritesOnly: Boolean) {
         this.showFavoritesOnly = showFavoritesOnly
         this.date = date
     }

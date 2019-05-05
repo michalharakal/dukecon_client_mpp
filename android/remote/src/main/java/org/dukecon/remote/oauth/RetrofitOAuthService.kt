@@ -6,8 +6,9 @@ import org.dukecon.data.source.OAuthConfiguration
 import org.dukecon.oauth.api.code.OauthApi
 import org.dukecon.oauth.api.refresh.RefreshOauthApi
 import java.io.IOException
+import javax.inject.Inject
 
-class RetrofitOAuthService(
+class RetrofitOAuthService @Inject constructor (
         private val oauthApi: OauthApi,
         private val refreshApi: RefreshOauthApi,
         private val oAuthConfiguration: OAuthConfiguration

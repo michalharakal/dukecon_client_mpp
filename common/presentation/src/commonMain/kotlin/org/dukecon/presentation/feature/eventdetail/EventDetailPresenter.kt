@@ -9,16 +9,18 @@ import org.dukecon.domain.model.Event
 import org.dukecon.domain.model.Favorite
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 import org.dukecon.presentation.mapper.EventMapper
 import org.dukecon.presentation.mapper.SpeakerMapper
 
-class EventDetailPresenter constructor(
+open class EventDetailPresenter constructor(
         private val conferenceRepository: ConferenceRepository,
         private val tokensStorage: TokensStorage,
         private val speakerMapper: SpeakerMapper,
         private val eventsMapper: EventMapper,
-        private val authManager: AuthManager
-) : CoroutinePresenter<EventDetailContract.View>(), EventDetailContract.Presenter {
+        private val authManager: AuthManager,
+        ioContextProvider:IoContextProvider
+) : CoroutinePresenter<EventDetailContract.View>(ioContextProvider), EventDetailContract.Presenter {
 
     override fun showError(error: Throwable) {
 

@@ -1,4 +1,9 @@
+plugins {
+    id "io.spring.dependency-management"
+}
+
 apply plugin: 'kotlin'
+apply from: "$rootDir/versions.gradle"
 
 archivesBaseName = 'android-remote'
 
@@ -19,5 +24,8 @@ dependencies {
     implementation deps.retrofit.client
     implementation deps.retrofit.converterGson
     compileOnly deps.threeTen.jdk
+
+    implementation 'javax.inject:javax.inject'
+
 
 }

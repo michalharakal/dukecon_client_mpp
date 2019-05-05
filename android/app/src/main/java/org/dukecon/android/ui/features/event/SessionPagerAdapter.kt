@@ -5,14 +5,14 @@ import android.text.format.DateUtils
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
-import org.threeten.bp.OffsetDateTime
+import io.ktor.util.date.GMTDate
 
 internal class SessionPagerAdapter : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }
 
-    var dates: List<OffsetDateTime> = emptyList()
+    var dates: List<GMTDate> = emptyList()
     var context: Context? = null
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -24,7 +24,7 @@ internal class SessionPagerAdapter : PagerAdapter() {
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return DateUtils.formatDateTime(context, dates[position].toInstant().toEpochMilli(), DateUtils.FORMAT_SHOW_DATE)
+        return DateUtils.formatDateTime(context, dates[position].timestamp, DateUtils.FORMAT_SHOW_DATE)
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
@@ -41,7 +41,7 @@ internal class SessionPagerAdapter : PagerAdapter() {
 
     private var showFavoritesOnly: Boolean = false;
 
-    fun showEventDates(eventDate: List<OffsetDateTime>, showFavoritesOnly: Boolean) {
+    fun showEventDates(eventDate: List<GMTDate>, showFavoritesOnly: Boolean) {
         dates = eventDate
         this.showFavoritesOnly = showFavoritesOnly
     }

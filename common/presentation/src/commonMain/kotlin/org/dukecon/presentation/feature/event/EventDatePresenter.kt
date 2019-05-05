@@ -3,10 +3,13 @@ package org.dukecon.presentation.feature.event
 import kotlinx.coroutines.launch
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 
 
-class EventDatePresenter constructor(val conferenceRepository: ConferenceRepository)
-    : CoroutinePresenter<EventDateListContract.View>(), EventDateListContract.Presenter {
+open class EventDatePresenter constructor(
+        val conferenceRepository: ConferenceRepository,
+        ioContextProvider:IoContextProvider)
+    : CoroutinePresenter<EventDateListContract.View>(ioContextProvider), EventDateListContract.Presenter {
 
     override fun showError(error: Throwable) {
     }

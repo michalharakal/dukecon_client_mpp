@@ -1,6 +1,7 @@
 .gradle/
 build/
 local.properties
+classes
 
 # InteliJ
 .idea/

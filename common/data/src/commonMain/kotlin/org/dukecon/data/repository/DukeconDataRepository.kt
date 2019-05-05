@@ -11,7 +11,6 @@ import org.dukecon.data.source.EventRemoteDataStore
 import org.dukecon.domain.model.*
 import org.dukecon.domain.repository.ConferenceRepository
 
-
 /**
  * Provides an implementation of the [ConferenceRepository] interface for communicating to and from
  * data sources
@@ -26,7 +25,6 @@ class DukeconDataRepository constructor(
         private val feedbackMapper: FeedbackMapper,
         private val favoriteMapper: FavoriteMapper,
         private val metadataMapper: MetaDateMapper
-
 ) : ConferenceRepository {
 
     override var onRefreshListeners: List<() -> Unit> = emptyList()

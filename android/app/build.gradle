@@ -1,8 +1,13 @@
+plugins {
+    id "io.spring.dependency-management"
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
+apply from: "$rootDir/versions.gradle"
 
 android {
 
@@ -14,7 +19,6 @@ android {
         versionCode buildConfig.version.code
         versionName buildConfig.version.name
         multiDexEnabled = false
-        testInstrumentationRunner "org.buffer.android.boilerplate.ui.test.TestRunner"
         vectorDrawables.useSupportLibrary = false
     }
 
@@ -47,6 +51,8 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/common.kotlin_module'
+        exclude 'META-INF/*.kotlin_module'
     }
 
     lintOptions {
@@ -62,21 +68,6 @@ android {
             dimension "dukecon"
             applicationIdSuffix ".javaland"
         }
-
-        apexconn {
-            dimension "dukecon"
-            applicationIdSuffix ".apexconnect"
-        }
-
-        apachecon {
-            dimension "dukecon"
-            applicationIdSuffix ".apachecon"
-        }
-
-        doagcon {
-            dimension "dukecon"
-            applicationIdSuffix ".doag"
-        }
     }
 }
 
@@ -91,66 +82,39 @@ configurations.all {
 }
 
 dependencies {
-    implementation project(':common:domain')
-    implementation project(':common:data')
-    implementation project(':common:presentation')
-    implementation project(':android:cache')
-    implementation project(':android:remote')
+    api project(':common:domain')
+    api project(':common:data')
+    api project(':common:presentation')
+    api project(':android:cache')
+    api project(':android:remote')
 
-    android
+    implementation 'javax.inject:javax.inject'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha5'
+    implementation 'androidx.cardview:cardview'
+    implementation 'androidx.recyclerview:recyclerview'
+    implementation 'com.google.dagger:dagger'
+    implementation 'org.slf4j:slf4j-android'
+    implementation 'com.jakewharton:butterknife'
+    implementation 'org.greenrobot:eventbus'
+    implementation 'com.google.code.gson:gson'
+    implementation 'commons-net:commons-net'
+    implementation 'com.google.android.material:material'
+    implementation 'com.jakewharton.threetenabp:threetenabp'
+    implementation 'io.ktor:ktor-client-okhttp'
+    implementation 'io.ktor:ktor-client-json-jvm'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor'
+    implementation 'com.squareup.retrofit2:retrofit'
+    implementation 'com.squareup.retrofit2:converter-gson'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
 
-/*    implementation mobileUiDependencies.javaxAnnotation
+    kapt 'com.google.dagger:dagger-android-processor:2.22.1'
+    kapt 'com.google.dagger:dagger-compiler:2.22.1'
+    kapt 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 
-    implementation mobileUiDependencies.kotlin
-    implementation mobileUiDependencies.coroutines
-    implementation mobileUiDependencies.javaxInject
-    implementation mobileUiDependencies.androidAnnotations
-
-    implementation mobileUiDependencies.cardview
-    implementation mobileUiDependencies.supportRecyclerView
-    implementation mobileUiDependencies.material
-    implementation mobileUiDependencies.coordinatorlayout
-    implementation mobileUiDependencies.constraintlayout
-    implementation mobileUiDependencies.appCompat
-    implementation mobileUiDependencies.timber
-    implementation mobileUiDependencies.picasso
-    implementation mobileUiDependencies.dagger
-    implementation mobileUiDependencies.daggerSupport
-    implementation mobileUiDependencies.kotlinLogging
-    implementation mobileUiDependencies.slf4jAndroid
-    implementation mobileUiDependencies.firebaseCore
-    implementation mobileUiDependencies.crashlytics
-    implementation mobileUiDependencies.okHttp
-    implementation mobileUiDependencies.okHttpLogger
-    implementation mobileUiDependencies.retrofit
-    implementation mobileUiDependencies.retrofitConverter
-    implementation mobileUiDependencies.browser
-    implementation mobileUiDependencies.androidxCore
-    implementation mobileUiDependencies.androidThreeTen
-    */
-
-    /*
-    testImplementation mobileUiTestDependencies.kotlinJUnit
-
-    kapt mobileUiDependencies.daggerCompiler
-    kapt mobileUiDependencies.daggerProcessor
-    compileOnly mobileUiDependencies.glassfishAnnotation
-
-    // Instrumentation test dependencies
-    androidTestImplementation mobileUiTestDependencies.junit
-    androidTestImplementation mobileUiTestDependencies.mockito
-    androidTestImplementation mobileUiTestDependencies.mockitoAndroid
-
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-web:3.1.1'
-    androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.1.1'
-
-    kaptTest mobileUiDependencies.daggerCompiler
-    kaptAndroidTest mobileUiDependencies.daggerCompiler
-    */
+    androidTestImplementation 'androidx.test:rules'
+    androidTestImplementation 'androidx.test:runner'
 }
 
 apply plugin: 'com.google.gms.google-services'

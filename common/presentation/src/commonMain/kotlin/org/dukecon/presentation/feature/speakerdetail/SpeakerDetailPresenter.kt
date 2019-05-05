@@ -4,12 +4,14 @@ import kotlinx.coroutines.launch
 import org.dukecon.domain.model.Speaker
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 import org.dukecon.presentation.mapper.SpeakerDetailMapper
 
-class SpeakerDetailPresenter constructor(
+open class SpeakerDetailPresenter constructor(
         val conferenceRepository: ConferenceRepository,
-        val speakerDetailMapper: SpeakerDetailMapper
-) : CoroutinePresenter<SpeakerDetailContract.View>(), SpeakerDetailContract.Presenter {
+        val speakerDetailMapper: SpeakerDetailMapper,
+        ioContextProvider: IoContextProvider
+) : CoroutinePresenter<SpeakerDetailContract.View>(ioContextProvider), SpeakerDetailContract.Presenter {
     override fun showError(error: Throwable) {
     }
 

@@ -1,8 +1,8 @@
 package org.dukecon.android.ui.features.login
 
 import android.app.Activity
+import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.net.toUri
 import org.dukecon.android.ui.features.login.browser.CustomTabActivityHelper
 import org.dukecon.android.ui.features.login.browser.WebviewFallback
 import org.dukecon.data.service.OAuthService
@@ -32,10 +32,10 @@ class DukeconAuthManager @Inject constructor(
 
     override suspend fun login(activity: Any) {
         val uri =
-                "${oAuthConfiguration.baseUrl}auth?client_id=${oAuthConfiguration.clientId}&redirect_uri=${oAuthConfiguration.redirectUri}&response_type=code&scope=openid%20offline_access".toUri()
+                "${oAuthConfiguration.baseUrl}auth?client_id=${oAuthConfiguration.clientId}&redirect_uri=${oAuthConfiguration.redirectUri}&response_type=code&scope=openid%20offline_access"
         val customTabsIntent = CustomTabsIntent.Builder().build()
         CustomTabActivityHelper.openCustomTab(
-                activity as Activity, customTabsIntent, uri, WebviewFallback()
+                activity as Activity, customTabsIntent, Uri.parse(uri), WebviewFallback()
         )
     }
 }

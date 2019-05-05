@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.text.TextUtils
-import timber.log.Timber
 import java.util.*
 
 object CustomTabsHelper {
@@ -111,7 +110,6 @@ object CustomTabsHelper {
                 return true
             }
         } catch (e: RuntimeException) {
-            Timber.e(e)
         }
 
         return false

@@ -1,25 +1,21 @@
 package org.dukecon.android.cache
 
 import io.ktor.util.date.GMTDate
-import mu.KotlinLogging
 import org.dukecon.android.cache.persistance.ConferenceCacheSerializer
 import org.dukecon.data.model.*
 import org.dukecon.data.repository.ConferenceDataCache
-
-private val logger = KotlinLogging.logger {}
 
 /**
  * Cached implementation for retrieving and saving Event instances. This class implements the
  * [ConferenceDataCache] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out. Just simple in memory chache
  */
-class ConferenceDataCacheImplconstructor(
+class ConferenceDataCacheImpl constructor(
         private val conferenceCacheSerializer: ConferenceCacheSerializer,
         private val preferencesHelper: PreferencesHelper
 ) : ConferenceDataCache {
 
     override fun getKeycloak(): KeycloakEntity {
-        logger.info { "reading getRooms from memory cache" }
         return keycloakEntity
     }
 
@@ -46,7 +42,6 @@ class ConferenceDataCacheImplconstructor(
 
     init {
         if (preferencesHelper.lastCacheTime > 0) {
-            logger.info { "cold start, reading data from disc cache" }
             conferenceCacheSerializer.run {
                 cachedRooms = readRooms()
                 cachedEvents = readEvents()
@@ -73,7 +68,6 @@ class ConferenceDataCacheImplconstructor(
     }
 
     override fun getRooms(): List<RoomEntity> {
-        logger.info { "reading getRooms from memory cache" }
         return cachedRooms
     }
 
@@ -85,12 +79,10 @@ class ConferenceDataCacheImplconstructor(
     }
 
     override fun getEvents(): List<EventEntity> {
-        logger.info { "reading getEvents from memory cache" }
         return cachedEvents
     }
 
     override fun getEvent(id: String): EventEntity {
-        logger.info { "reading getEvent with id= ${id} from memory cache" }
         return cachedEvents.find { event -> event.id == id } ?: emptyEntity()
     }
 
@@ -105,12 +97,10 @@ class ConferenceDataCacheImplconstructor(
     }
 
     override fun getSpeaker(id: String): SpeakerEntity {
-        logger.info { "reading speaker with id= ${id} from memory cache" }
         return cacheSpeakers.find { speaker -> speaker.id == id } ?: emptySpeakerEntity()
     }
 
     override fun getFavorites(): List<FavoriteEntity> {
-        logger.info { "reading favorites from memory cache" }
         return cacheFavorites
     }
 
@@ -123,8 +113,6 @@ class ConferenceDataCacheImplconstructor(
     }
 
     override fun getMetaData(): MetaDataEntity {
-        logger.info { "reading metadata from memory cache" }
-
         return cacheMetaData
     }
 
@@ -140,10 +128,16 @@ class ConferenceDataCacheImplconstructor(
     }
 
     private fun emptyEntity(): EventEntity {
+        return EventEntity("", "", "",
+                GMTDate(),
+                GMTDate(),
+                listOf(), "", "", "", "", "", false, false, false, false, 0)
+        /*
         val event = EventEntity("", "", "",
                 GMTDate(),
                 GMTDate(),
                 listOf(), "", "", "", "", "", false, false, false, false, 0)
         return event
+        */
     }
 }

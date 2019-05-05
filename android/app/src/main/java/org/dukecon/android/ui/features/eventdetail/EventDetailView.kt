@@ -101,15 +101,19 @@ class EventDetailView(context: Context, attrs: AttributeSet? = null, defStyle: I
             activity.finish()
         }
 
+        // TODO MPP
+        /*
         val startTime = DateUtils.formatDateTime(context, session.startTime.toInstant().toEpochMilli(), DateUtils.FORMAT_SHOW_TIME)
         val endTime = DateUtils.formatDateTime(context, session.endTime.toInstant().toEpochMilli(), DateUtils.FORMAT_SHOW_TIME)
         banner.text = String.format(context.getString(R.string.session_detail_time), session.room,
                 startTime, endTime)
-
+*/
         description.text = session.description
         val instant = Instant.ofEpochMilli(currentTimeProvider.currentTimeMillis())
         val now = instant.atZone(ZoneId.systemDefault()).toOffsetDateTime()
 
+        // TODO MPP
+        /*
         if (session.startTime.isAfter(now)) {
             status.visibility = GONE
             favorite.visibility = View.VISIBLE
@@ -132,6 +136,7 @@ class EventDetailView(context: Context, attrs: AttributeSet? = null, defStyle: I
                 feedback.visibility = View.VISIBLE
             }
         }
+        */
     }
 
     override fun showSpeakerInfo(speakers: List<SpeakerView>) {

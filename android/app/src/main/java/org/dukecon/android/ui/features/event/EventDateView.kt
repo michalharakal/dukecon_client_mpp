@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import io.ktor.util.date.GMTDate
 import kotlinx.android.synthetic.main.view_sessions.view.*
 import org.dukecon.android.ui.R
 import org.dukecon.android.ui.ext.getComponent
@@ -18,6 +19,17 @@ import javax.inject.Inject
 
 class EventDateView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
     FrameLayout(context, attrs, defStyle), EventDateListContract.View {
+
+    override fun showSessionDates(sessionDates: List<GMTDate>) {
+        adapter.showEventDates(sessionDates, showFavoritesOnly)
+        adapter.notifyDataSetChanged()
+
+        if (sessionDates.size > 1) {
+            tabs.visibility = View.VISIBLE
+        }
+
+    }
+
     override fun showError(throwable: Throwable) {
 
     }
@@ -56,15 +68,6 @@ class EventDateView @JvmOverloads constructor(context: Context, attrs: Attribute
     override fun showNoSessionDates() {
         adapter.clear()
         adapter.notifyDataSetChanged()
-    }
-
-    override fun showSessionDates(sessionDates: List<OffsetDateTime>) {
-        adapter.showEventDates(sessionDates, showFavoritesOnly)
-        adapter.notifyDataSetChanged()
-
-        if (sessionDates.size > 1) {
-            tabs.visibility = View.VISIBLE
-        }
     }
 
     override fun scrollToCurrentDay() {

@@ -1,12 +1,9 @@
 package org.dukecon.android.ui.features.timemachine
 
-import mu.KotlinLogging
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneId
 import javax.inject.Inject
-
-private val logger = KotlinLogging.logger {}
 
 class DebugCurrentTimeProvider @Inject constructor() : CustomizableCurrentTimeProvider {
 
@@ -18,7 +15,6 @@ class DebugCurrentTimeProvider @Inject constructor() : CustomizableCurrentTimePr
 
     override fun setCustomMillis(value: Long) {
         offset = value - OffsetDateTime.now().toInstant().toEpochMilli()
-        logger.info { "Setting custom time to %s".format(getCurrentTime()) }
     }
 
     private fun getCurrentTime(): String {

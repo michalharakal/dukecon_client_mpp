@@ -1,16 +1,16 @@
 package org.dukecon.presentation.feature.feedback
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.dukecon.domain.model.Feedback
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 import kotlin.coroutines.CoroutineContext
 
-class FeedbackPresenter (private val conferenceRepository: ConferenceRepository,
-                         private val ioDispatcher: CoroutineContext) :
-        CoroutinePresenter<FeedbackMvp.View>(), FeedbackMvp.Presenter {
+open class FeedbackPresenter(private val conferenceRepository: ConferenceRepository,
+                             private val ioContextProvider: IoContextProvider) :
+        CoroutinePresenter<FeedbackMvp.View>(ioContextProvider), FeedbackMvp.Presenter {
     override fun showError(error: Throwable) {
         view?.dismiss()
     }
@@ -34,7 +34,7 @@ class FeedbackPresenter (private val conferenceRepository: ConferenceRepository,
         val sessionId = this.sessionId
         if (sessionId != null) {
             launch {
-                withContext(ioDispatcher) {
+                withContext(getIoContext()) {
                     conferenceRepository.submitFeedback(Feedback(sessionId, overall, comment))
                 }
                 view?.dismiss()

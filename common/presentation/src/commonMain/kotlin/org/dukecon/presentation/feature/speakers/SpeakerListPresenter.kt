@@ -4,11 +4,13 @@ import kotlinx.coroutines.launch
 import org.dukecon.domain.model.Speaker
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 import org.dukecon.presentation.mapper.SpeakerMapper
 
-class SpeakerListPresenter constructor(val conferenceRepository: ConferenceRepository,
-                                       val speakersMapper: SpeakerMapper
-) : CoroutinePresenter<SpeakerListContract.View>(), SpeakerListContract.Presenter {
+open class SpeakerListPresenter constructor(val conferenceRepository: ConferenceRepository,
+                                            val speakersMapper: SpeakerMapper,
+                                            ioContextProvider: IoContextProvider
+) : CoroutinePresenter<SpeakerListContract.View>(ioContextProvider), SpeakerListContract.Presenter {
     override fun showError(error: Throwable) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

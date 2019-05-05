@@ -6,12 +6,14 @@ import org.dukecon.domain.features.time.CurrentTimeProvider
 import org.dukecon.domain.model.Event
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
+import org.dukecon.presentation.IoContextProvider
 import org.dukecon.presentation.mapper.EventMapper
 
-class EventListPresenter constructor(private val currentTimeProvider: CurrentTimeProvider,
-                                             private val conferenceRepository: ConferenceRepository,
-                                             private val eventsMapper: EventMapper) :
-        CoroutinePresenter<EventListContract.View>(), EventListContract.Presenter {
+open class EventListPresenter constructor(private val currentTimeProvider: CurrentTimeProvider,
+                                          private val conferenceRepository: ConferenceRepository,
+                                          private val eventsMapper: EventMapper,
+                                          ioContextProvider: IoContextProvider) :
+        CoroutinePresenter<EventListContract.View>(ioContextProvider), EventListContract.Presenter {
 
     private val onRefreshListener: () -> Unit = this::refreshDataFromRepo
 

@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_session.view.*
 import org.dukecon.android.ui.R
 import org.dukecon.android.ui.utils.DrawableUtils
 import org.dukecon.domain.features.time.CurrentTimeProvider
 import org.dukecon.presentation.model.EventView
-import org.threeten.bp.Duration
 import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 
@@ -37,17 +35,20 @@ internal class EventsAdapter(
 
         holder.session = session
 
-        val startTime = formatDateTime(context, session.startTime.toInstant().toEpochMilli(), DateUtils.FORMAT_SHOW_TIME)
+        val st = 0L // session.startTime.toJvmDate().time;
+        val startTime = formatDateTime(context, st, DateUtils.FORMAT_SHOW_TIME)
         holder.timeslot.text = String.format(context.getString(R.string.session_start_time), startTime)
 
         // Dim the session card once hte session is over
         val instant = Instant.ofEpochMilli(currentTimeProvider.currentTimeMillis())
         val now = instant.atZone(ZoneId.systemDefault()).toOffsetDateTime()
+        // TODO MPP
+        /*
         if (session.endTime.isAfter(now)) {
             holder.card.setBackgroundColor(ContextCompat.getColor(context, R.color.session_bg))
         } else {
             holder.card.setBackgroundColor(ContextCompat.getColor(context, R.color.session_finished_bg))
-        }
+        }*/
 
         holder.title.text = session.title
 
@@ -64,9 +65,13 @@ internal class EventsAdapter(
         }
 
         if (session.room.isNotEmpty()) {
+            val duration = ""
+            /// TODO MPP
+            /*
             val duration = String.format(
                     context.getString(R.string.session_duration),
                     Duration.between(session.startTime, session.endTime).toMinutes())
+             */
             holder.room.visibility = View.VISIBLE
             holder.room.text = context.getString(R.string.event_list_room_duration, session.room, duration)
             holder.room.setCompoundDrawablesWithIntrinsicBounds(
@@ -77,20 +82,28 @@ internal class EventsAdapter(
         } else {
             holder.room.visibility = View.GONE
         }
+        // TODO MPP
+        /*
 
         if (session.favorite.selected) {
             holder.favorite.visibility = View.VISIBLE
         } else {
             holder.favorite.visibility = View.GONE
         }
+        */
+
 
         if (position > 0) {
             val previous = sessions[position - 1]
-            holder.timeslot.visibility = if (previous.startTime == session.startTime) {
+            // TODO MPP
+            /*
+            holder.timeslot.visibility = if (previous.startTime. == session.startTime) {
                 View.INVISIBLE
             } else {
                 View.VISIBLE
             }
+
+             */
         } else {
             holder.timeslot.visibility = View.VISIBLE
         }

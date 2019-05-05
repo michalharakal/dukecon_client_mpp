@@ -12,6 +12,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation project(':common:domain')
+
                 implementation deps.kotlin.stdlib.common
                 implementation deps.kotlin.coroutines.common
                 implementation deps.ktor.core.common

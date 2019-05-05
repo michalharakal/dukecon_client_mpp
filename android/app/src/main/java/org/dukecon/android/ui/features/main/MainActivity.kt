@@ -9,7 +9,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import mu.KotlinLogging
 import org.dukecon.android.ui.R
 import org.dukecon.android.ui.ext.getAppComponent
 import org.dukecon.android.ui.features.event.FavoritesFragment
@@ -17,7 +16,6 @@ import org.dukecon.android.ui.features.event.ScheduleFragment
 import org.dukecon.android.ui.features.event.SessionNavigator
 import org.dukecon.android.ui.features.eventdetail.EventDetailActivity
 import org.dukecon.android.ui.features.info.InfoFragment
-import org.dukecon.android.ui.features.networking.NetworkOfflineChecker
 import org.dukecon.android.ui.features.speaker.SpeakersFragment
 import org.dukecon.android.ui.features.speakerdetail.SpeakerDetailActivity
 import org.dukecon.android.ui.features.speakerdetail.SpeakerNavigator
@@ -28,8 +26,6 @@ import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.model.EventView
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-
-private val logger = KotlinLogging.logger {}
 
 class MainActivity : AppCompatActivity(), SessionNavigator,
         SpeakerNavigator, CoroutineScope {
@@ -43,9 +39,6 @@ class MainActivity : AppCompatActivity(), SessionNavigator,
     }
 
     private lateinit var component: MainComponent
-
-    @Inject
-    lateinit var networkOfflineChecker: NetworkOfflineChecker
 
     @Inject
     lateinit var exchangeCodeForToken: AuthManager
@@ -105,15 +98,9 @@ class MainActivity : AppCompatActivity(), SessionNavigator,
         if (uri != null) {
             val code = uri.getQueryParameter("code") ?: ""
             launch(Dispatchers.IO) {
-                logger.debug {
-                    "exchnaging $code"
-                }
                 try {
                     exchangeCodeForToken.exchangeToken(code)
                 } catch (e: Exception) {
-                    logger.debug {
-                        "exception $code"
-                    }
                 }
             }
         }
@@ -123,16 +110,6 @@ class MainActivity : AppCompatActivity(), SessionNavigator,
         launch(Dispatchers.IO) {
             conferenceRepository.update()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        networkOfflineChecker.enable()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        networkOfflineChecker.disable()
     }
 
     private lateinit var currentFragment: Fragment
