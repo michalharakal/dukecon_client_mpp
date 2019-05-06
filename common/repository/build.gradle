@@ -3,7 +3,10 @@ plugins {
 }
 
 apply from: "$rootDir/versions.gradle"
+
 apply plugin: 'org.jetbrains.kotlin.multiplatform'
+apply plugin: 'kotlinx-serialization'
+
 
 archivesBaseName = 'common-data'
 
@@ -53,8 +56,13 @@ kotlin {
         }
         iosMain {
             dependencies {
-                implementation deps.ktor.core.ios
-                implementation deps.ktor.utils.ios
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native"
+
+                implementation "io.ktor:ktor-client-ios"
+                implementation "io.ktor:ktor-client-logging-native"
+                implementation "io.ktor:ktor-client-core-native"
+                implementation "io.ktor:ktor-client-json-native"
             }
         }
     }

@@ -23,7 +23,5 @@ class LibrariesListRepository : LibrariesRepository {
             Library("Kotlin", "JetBrains", "Apache 2", "http://kotlinlang.org/"),
             Library("CircularImageView", "Lopez Mikhael", "Apache 2", "https://github.com/lopspower/CircularImageView"),
             Library("GSON serialiser/deserialisers", "(c) 2014 Greg Kopff", "The MIT License (MIT)", "https://github.com/leokraemer/android-gson-javatime-serialisers")
-
     )
-
 }

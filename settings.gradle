@@ -5,7 +5,5 @@ enableFeaturePreview('GRADLE_METADATA')
 include ':common:domain'
 include ':common:data'
 include ':common:presentation'
+include ':common:repository'
 include ':android:app'
-include ':android:cache'
-include ':android:remote'
-include ':android:dukecon-api'

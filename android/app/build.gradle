@@ -85,8 +85,7 @@ dependencies {
     api project(':common:domain')
     api project(':common:data')
     api project(':common:presentation')
-    api project(':android:cache')
-    api project(':android:remote')
+    api project(':common:repository')
 
     implementation 'javax.inject:javax.inject'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha5'

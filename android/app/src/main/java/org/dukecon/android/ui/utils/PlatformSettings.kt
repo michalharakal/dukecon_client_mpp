@@ -1,0 +1,28 @@
+package org.dukecon.android.ui.utils
+
+import android.content.Context
+import android.preference.PreferenceManager
+import org.dukecon.data.cache.Settings
+
+
+class PlatformSettings constructor(context: Context) : Settings {
+    override fun clear(key: String) {
+
+    }
+
+    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    override fun putBoolean(key: String, value: Boolean) {
+        sharedPreferences.edit().putBoolean(key, value).apply()
+    }
+
+    override fun getBoolean(key: String, defaultValue: Boolean): Boolean =
+            sharedPreferences.getBoolean(key, defaultValue)
+
+    override fun putString(key: String, value: String) {
+        sharedPreferences.edit().putString(key, value).apply()
+    }
+
+    override fun getString(key: String, defaultValue: String): String =
+            sharedPreferences.getString(key, defaultValue)
+}
