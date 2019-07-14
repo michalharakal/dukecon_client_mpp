@@ -88,7 +88,7 @@ dependencies {
     api project(':common:repository')
 
     implementation 'javax.inject:javax.inject'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha5'
+    implementation 'androidx.constraintlayout:constraintlayout'
     implementation 'androidx.cardview:cardview'
     implementation 'androidx.recyclerview:recyclerview'
     implementation 'com.google.dagger:dagger'

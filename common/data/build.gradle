@@ -1,9 +1,8 @@
-plugins {
-    id "io.spring.dependency-management"
-}
-
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'co.touchlab.kotlinxcodesync'
+apply plugin: 'io.spring.dependency-management'
 apply from: "$rootDir/versions.gradle"
-apply plugin: 'org.jetbrains.kotlin.multiplatform'
 
 archivesBaseName = 'common-data'
 
@@ -18,7 +17,7 @@ kotlin {
             dependencies {
                 implementation project(':common:domain')
 
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common"
 
@@ -27,18 +26,10 @@ kotlin {
                 implementation "io.ktor:ktor-client-logging"
             }
         }
-        commonTest {
-            dependencies {
-                implementation deps.kotlin.test.common
-                implementation deps.kotlin.test.annotations
-            }
-        }
         jvmMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-common'
                 implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
-
                 implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime'
 
                 implementation 'io.ktor:ktor-client-core-jvm'
@@ -46,31 +37,54 @@ kotlin {
                 implementation 'io.ktor:ktor-client-logging-jvm'
             }
         }
-        jvmTest {
-            dependencies {
-                implementation deps.kotlin.test.jdk
-            }
-        }
+
         iosMain {
             dependencies {
-                implementation deps.ktor.core.ios
-                implementation deps.ktor.utils.ios
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native"
+                implementation 'io.ktor:ktor-client-core-native'
+                implementation 'io.ktor:ktor-client-json-native'
+                implementation 'io.ktor:ktor-client-logging-native'
             }
         }
     }
 
     targets {
-        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
-                           ? presets.iosArm64 : presets.iosX64
+        fromPreset(presets.jvm, 'jvm')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
+                              ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
-                framework {
-                    baseName = 'commonClient'
-                }
+                framework('shared')
             }
         }
-
-        fromPreset(presets.jvm, 'jvm')
     }
+}
+
+
+task packForXCode(type: Sync) {
+    final File frameworkDir = new File(buildDir, "xcode-frameworks")
+    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final def framework = kotlin.targets.ios.binaries.getFramework("shared", mode)
+
+    inputs.property "mode", mode
+    dependsOn framework.linkTask
+
+    from { framework.outputFile.parentFile }
+    into frameworkDir
+
+    doLast {
+        new File(frameworkDir, 'gradlew').with {
+            text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
+            setExecutable(true)
+        }
+    }
+}
+
+tasks.build.dependsOn packForXCode
+
+xcode {
+    projectPath = "${project.rootDir}/ios/Test/Test.xcodeproj"
+    target = "Test"
 }

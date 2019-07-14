@@ -1,6 +1,10 @@
-apply plugin: 'org.jetbrains.kotlin.multiplatform'
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'co.touchlab.kotlinxcodesync'
+apply plugin: 'io.spring.dependency-management'
+apply from: "$rootDir/versions.gradle"
 
-archivesBaseName = 'common-data'
+archivesBaseName = 'common-domain'
 
 // TODO work around https://youtrack.jetbrains.com/issue/KT-27170
 configurations {
@@ -11,48 +15,76 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation deps.kotlin.stdlib.common
-                implementation deps.kotlin.coroutines.common
-                implementation deps.ktor.core.common
-                implementation deps.ktor.utils.common
-            }
-        }
-        commonTest {
-            dependencies {
-                implementation deps.kotlin.test.common
-                implementation deps.kotlin.test.annotations
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common"
+
+                implementation "io.ktor:ktor-client-core"
+                implementation "io.ktor:ktor-client-json"
+                implementation "io.ktor:ktor-client-logging"
             }
         }
         jvmMain {
             dependencies {
-                implementation deps.kotlin.stdlib.jdk
-                implementation deps.kotlin.coroutines.jdk
-                implementation deps.ktor.core.jdk
-                implementation deps.ktor.utils.jdk
-            }
-        }
-        jvmTest {
-            dependencies {
-                implementation deps.kotlin.test.jdk
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-common'
+                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+
+                implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime'
+
+                implementation 'io.ktor:ktor-client-core-jvm'
+                implementation 'io.ktor:ktor-client-json-jvm'
+                implementation 'io.ktor:ktor-client-logging-jvm'
             }
         }
 
         iosMain {
             dependencies {
-                implementation deps.ktor.client.ios
-                implementation deps.ktor.core.ios
-                implementation deps.ktor.utils.ios
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native"
+                implementation 'io.ktor:ktor-client-core-native'
+                implementation 'io.ktor:ktor-client-json-native'
+                implementation 'io.ktor:ktor-client-logging-native'
             }
         }
     }
 
     targets {
-        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
-                           ? presets.iosArm64 : presets.iosX64
+        fromPreset(presets.jvm, 'jvm')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
+                              ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'ios') {
-            compilations.main.outputKinds('FRAMEWORK')
+            binaries {
+                framework('shared')
+            }
         }
-        fromPreset(presets.jvm, 'jvm')
     }
+}
+
+
+task packForXCode(type: Sync) {
+    final File frameworkDir = new File(buildDir, "xcode-frameworks")
+    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final def framework = kotlin.targets.ios.binaries.getFramework("shared", mode)
+
+    inputs.property "mode", mode
+    dependsOn framework.linkTask
+
+    from { framework.outputFile.parentFile }
+    into frameworkDir
+
+    doLast {
+        new File(frameworkDir, 'gradlew').with {
+            text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
+            setExecutable(true)
+        }
+    }
+}
+
+tasks.build.dependsOn packForXCode
+
+xcode {
+    projectPath = "${project.rootDir}/ios/Test/Test.xcodeproj"
+    target = "Test"
 }
