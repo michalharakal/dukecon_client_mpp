@@ -13,19 +13,19 @@ dependencyManagement {
         dependencies {
             dependency 'com.google.dagger:dagger-compiler:2.22.1'
             dependency 'com.google.dagger:dagger:2.22.1'
-            dependency 'io.reactivex.rxjava2:rxandroid:2.1.0'
+            dependency 'io.reactivex.rxjava2:rxandroid:2.1.1'
             dependency 'org.slf4j:slf4j-android:1.7.26'
             dependency 'javax.annotation:jsr250-api:1.0'
             dependency 'javax.inject:javax.inject:1'
-            dependency 'androidx.annotation:annotation:1.0.2'
+            dependency 'androidx.annotation:annotation:1.1.0'
             dependency 'androidx.cardview:cardview:1.0.0'
             dependency 'androidx.recyclerview:recyclerview:1.0.0'
             dependency 'androidx.constraintlayout:constraintlayout:1.1.3'
             dependency 'com.google.code.gson:gson:2.8.5'
             dependency 'com.google.android.material:material:1.0.0'
             dependency 'com.jakewharton.threetenabp:threetenabp:1.1.2'
-            dependency 'io.ktor:ktor-client-okhttp:1.1.3'
-            dependency 'io.ktor:ktor-client-json-jvm:1.1.3'
+            dependency 'io.ktor:ktor-client-okhttp:1.2.2'
+            dependency 'io.ktor:ktor-client-json-jvm:1.2.2'
             dependency 'com.google.dagger:dagger-compiler:2.22.1'
             dependency 'com.google.dagger:dagger-android-processor:2.22.1'
 
@@ -37,16 +37,16 @@ dependencyManagement {
             dependency "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41"
 
 
-            dependency "io.ktor:ktor-client-core:1.1.3"
-            dependency "io.ktor:ktor-client-json:1.1.3"
-            dependency "io.ktor:ktor-client-logging:1.1.3"
-            dependency "io.ktor:ktor-client-logging-jvm:1.1.3"
-            dependency "io.ktor:ktor-client-logging:1.1.3"
-            dependency "io.ktor:ktor-client-logging-native:1.1.3"
+            dependency "io.ktor:ktor-client-core:1.2.2"
+            dependency "io.ktor:ktor-client-json:1.2.2"
+            dependency "io.ktor:ktor-client-logging:1.2.2"
+            dependency "io.ktor:ktor-client-logging-jvm:1.2.2"
+            dependency "io.ktor:ktor-client-logging:1.2.2"
+            dependency "io.ktor:ktor-client-logging-native:1.2.2"
 
-            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.1.1"
-            dependency 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
-            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.1.1"
+            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.0-M2"
+            dependency 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-M2'
+            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.0-M2"
 
 
             dependency 'commons-net:commons-net:3.6'
@@ -62,29 +62,29 @@ dependencyManagement {
 
 
 
-            dependency "io.ktor:ktor-client-ios:1.1.3"
-            dependency "io.ktor:ktor-client-logging-native:1.1.3"
-            dependency "io.ktor:ktor-client-core-native:1.1.3"
-            dependency "io.ktor:ktor-client-json-native:1.1.3"
+            dependency "io.ktor:ktor-client-ios:1.2.2"
+            dependency "io.ktor:ktor-client-logging-native:1.2.2"
+            dependency "io.ktor:ktor-client-core-native:1.2.2"
+            dependency "io.ktor:ktor-client-json-native:1.2.2"
 
-            dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.10.0"
-            dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.10.0"
-            dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.10.0"
+            dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.1"
+            dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.11.1"
+            dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.1"
 
             dependency 'junit:junit:4.12'
-            dependency 'androidx.test:rules:1.1.1'
-            dependency 'androidx.test:runner:1.1.1'
+            dependency 'androidx.test:rules:1.2.0'
+            dependency 'androidx.test:runner:1.2.0'
             dependency 'org.mockito:mockito-core:2.26.0'
             dependency 'org.mockito:mockito-android:2.26.0'
-            dependency 'androidx.test.espresso:espresso-core:3.1.1'
-            dependency 'androidx.test.espresso:espresso-intents:3.1.1'
-            dependency 'androidx.test.espresso:espresso-contrib:3.1.1'
-            dependency 'androidx.test.ext:junit:1.1.0'
+            dependency 'androidx.test.espresso:espresso-core:3.2.0'
+            dependency 'androidx.test.espresso:espresso-intents:3.2.0'
+            dependency 'androidx.test.espresso:espresso-contrib:3.2.0'
+            dependency 'androidx.test.ext:junit:1.1.1'
             dependency 'org.hamcrest:hamcrest:2.1'
             dependency 'org.json:json:20180813'
             dependency 'io.swagger:swagger-annotations:1.5.21'
             dependency 'commons-io:commons-io:2.6'
-            dependency 'androidx.test:rules:1.2.0-alpha05'
+            dependency 'androidx.test:rules:1.3.0-alpha01'
         }
     }
 }

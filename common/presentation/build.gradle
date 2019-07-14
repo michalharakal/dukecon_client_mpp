@@ -58,7 +58,11 @@ kotlin {
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
-                framework('shared')
+                framework {
+                    // Use "marker" to embed the bitcode marker (for debug builds).
+                    // Use "disable" to disable embedding.
+                    embedBitcode "bitcode" // for release binaries.
+                }
             }
         }
     }
@@ -68,7 +72,8 @@ kotlin {
 task packForXCode(type: Sync) {
     final File frameworkDir = new File(buildDir, "xcode-frameworks")
     final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
-    final def framework = kotlin.targets.ios.binaries.getFramework("shared", mode)
+    /*
+    final def framework = kotlin.targets.ios.binaries.getFramework("FRAMEWORK", mode)
 
     inputs.property "mode", mode
     dependsOn framework.linkTask
@@ -82,6 +87,7 @@ task packForXCode(type: Sync) {
             setExecutable(true)
         }
     }
+    */
 }
 
 tasks.build.dependsOn packForXCode
