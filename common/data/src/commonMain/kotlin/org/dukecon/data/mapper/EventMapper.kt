@@ -3,8 +3,7 @@ package org.dukecon.data.mapper
 import org.dukecon.data.model.EventEntity
 import org.dukecon.domain.model.*
 
-
-open class EventMapper constructor() {
+class EventMapper {
 
     fun mapFromEntity(type: EventEntity, speakers: List<Speaker>,
                       favorites: List<Favorite>, metaData: MetaData): Event {

@@ -19,3 +19,13 @@ proglibs
 
 #asciidoctor
 .asciidoctor
+
+.database
+
+*.otf
+*.ttf
+Pods/
+
+.project
+.settings
+.classpath

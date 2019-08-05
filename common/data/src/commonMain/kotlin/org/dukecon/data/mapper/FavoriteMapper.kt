@@ -10,7 +10,7 @@ import org.dukecon.domain.model.Speaker
  * Map a [FavoriteEntity] to and from a [Favorite] instance when data is moving between
  * this later and the Domain layer
  */
-open class FavoriteMapper constructor() : Mapper<FavoriteEntity, Favorite> {
+class FavoriteMapper constructor() : Mapper<FavoriteEntity, Favorite> {
 
     /**
      * Map a [FavoriteEntity] instance to a [Favorite] instance

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
 import org.dukecon.android.ui.ext.getComponent
 import org.dukecon.android.ui.features.main.MainComponent
 import org.dukecon.domain.features.time.CurrentTimeProvider

@@ -1,0 +1,88 @@
+plugins {
+    id "io.spring.dependency-management"
+}
+
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'co.touchlab.kotlinxcodesync'
+
+apply from: "$rootDir/versions.gradle"
+
+archivesBaseName = 'common-dukecon'
+
+configurations {
+    compileClasspath
+}
+kotlin {
+    jvm {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = '1.8'
+            }
+        }
+    }
+    targets {
+        fromPreset(presets.jvm, 'jvm')
+        /*
+        fromPreset(presets.iosX64, 'iosX64')
+        fromPreset(presets.iosArm64, 'iosArm64')
+         */
+        fromPreset(presets.macosX64, 'macosX64')
+
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation project(':common:domain')
+
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common"
+
+                implementation "io.ktor:ktor-client-core"
+                implementation "io.ktor:ktor-client-serialization"
+                implementation "io.ktor:ktor-client-logging"
+            }
+        }
+
+        jvmMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+                implementation "io.ktor:ktor-client-core-jvm"
+                implementation "io.ktor:ktor-client-serialization-jvm"
+                implementation "io.ktor:ktor-client-logging-jvm"
+            }
+        }
+
+        macosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+
+                implementation "io.ktor:ktor-client-core-native"
+                implementation "io.ktor:ktor-client-serialization-native"
+                implementation "io.ktor:ktor-client-logging-native"
+
+            }
+        }
+
+        macosX64 {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+
+                implementation "io.ktor:ktor-client-core-native"
+                implementation "io.ktor:ktor-client-serialization-native"
+                implementation "io.ktor:ktor-client-logging-native"
+                implementation "io.ktor:ktor-client-curl"
+
+            }
+        }
+    }
+    macosX64 {
+        binaries {
+            executable {
+                entryPoint = "org.dukecon.main"
+            }
+        }
+    }
+}

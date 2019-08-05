@@ -14,13 +14,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.dukecon.android.ui.features.login.DummyDukeconAuthManager
 import org.dukecon.android.ui.features.login.SettingsTokenStorage
-import org.dukecon.android.ui.utils.PlatformSettings
+import org.dukecon.android.ui.storage.AndroidStorage
 import org.dukecon.common.data.DukeconDataKtorRepository
-import org.dukecon.data.cache.Settings
 import org.dukecon.data.mapper.*
 import org.dukecon.data.repository.EventRemote
 import org.dukecon.data.source.EventRemoteDataStore
 import org.dukecon.domain.aspects.auth.AuthManager
+import org.dukecon.domain.aspects.storage.ApplicationStorage
 import org.dukecon.domain.aspects.twitter.TwitterLinks
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.domain.repository.ConferenceRepository
@@ -171,17 +171,18 @@ open class ApplicationModule {
         return dukeconAuthManager
     }
 
-    @Provides
-    @Singleton
-    internal fun provideSettings(context: Context):Settings {
-        return PlatformSettings(context)
-    }
 
     @Provides
     @Singleton
-    internal fun provideEventRepository(settings: Settings): ConferenceRepository {
+    internal fun provideEventRepository(settings: ApplicationStorage): ConferenceRepository {
         return DukeconDataKtorRepository("", "", settings)
     }
+
+    @Provides
+    fun providesAppStorage(context: Context): ApplicationStorage {
+        return AndroidStorage(context)
+    }
+
 
     @Provides
     fun providesTokensStorage(settings: SettingsTokenStorage): TokensStorage {

@@ -6,10 +6,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DummyDukeconAuthManager @Inject constructor(
-) : AuthManager {
-    override fun hasSession(token: OAuthToken): Boolean {
-        return false;
+class DummyDukeconAuthManager @Inject constructor() : AuthManager {
+    override fun hasSession(token: OAuthToken?): Boolean {
+        return false
     }
 
     override suspend fun exchangeToken(code: String) {

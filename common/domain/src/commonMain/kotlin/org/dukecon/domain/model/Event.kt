@@ -1,6 +1,6 @@
 package org.dukecon.domain.model
 
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
 
 data class Event(val eventId: String,
                  val title: String,

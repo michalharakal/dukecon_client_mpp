@@ -9,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_session_detail.view.*
 import org.dukecon.android.ui.R
 import org.dukecon.android.ui.ext.getComponent
@@ -59,7 +60,7 @@ class EventDetailView(context: Context, attrs: AttributeSet? = null, defStyle: I
             speakerNavigator.navigateToSpeaker(speaker.id)
         }
         speakers.adapter = speakerAdapter
-        speakers.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        speakers.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
         // initially hide the feedback button until we get a session
         feedback.hide()

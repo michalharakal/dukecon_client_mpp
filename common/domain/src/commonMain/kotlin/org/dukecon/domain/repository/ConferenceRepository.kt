@@ -1,6 +1,6 @@
 package org.dukecon.domain.repository
 
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
 import org.dukecon.domain.model.*
 
 /**

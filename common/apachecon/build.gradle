@@ -1,0 +1,48 @@
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'co.touchlab.kotlinxcodesync'
+apply plugin: 'io.spring.dependency-management'
+apply from: "$rootDir/versions.gradle"
+
+configurations {
+    compileClasspath
+}
+
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                api project(':common:domain')
+                api project(':common:data')
+
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+            }
+        }
+
+        jvmIos {
+            dependencies {
+            }
+        }
+    }
+
+    targets {
+        fromPreset(presets.jvm, 'jvm')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") \
+                                ? presets.iosArm64
+                : presets.iosX64
+
+        fromPreset(iOSTarget, 'ios') {
+            binaries {
+                framework('shared')
+            }
+        }
+    }
+}

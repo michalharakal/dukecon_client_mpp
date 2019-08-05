@@ -5,7 +5,8 @@ import android.text.format.DateUtils
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
+
 
 internal class SessionPagerAdapter : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {

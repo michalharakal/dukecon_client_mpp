@@ -1,7 +1,7 @@
 package org.dukecon.presentation.feature.event
 
-import io.ktor.util.date.GMTDate
 import kotlinx.coroutines.launch
+import org.dukecon.date.GMTDate
 import org.dukecon.domain.features.time.CurrentTimeProvider
 import org.dukecon.domain.model.Event
 import org.dukecon.domain.repository.ConferenceRepository
