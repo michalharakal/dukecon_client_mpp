@@ -1,7 +1,5 @@
 package org.dukecon.configuration
 
-import org.dukecon.data.source.ConferenceConfiguration
-
 
 class ApacheConConfiguration : ConferenceConfiguration {
     override val supportsFeedback: Boolean

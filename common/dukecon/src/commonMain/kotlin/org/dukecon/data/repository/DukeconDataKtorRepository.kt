@@ -6,11 +6,11 @@ import kotlinx.serialization.list
 import kotlinx.serialization.serializer
 import org.dukecon.date.GMTDate
 import org.dukecon.domain.aspects.storage.ApplicationStorage
+import org.dukecon.domain.model.*
+import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.repository.api.DukeconApi
 import org.dukecon.repository.api.Event
 import org.dukecon.repository.cache.SessionModel
-import org.dukecon.domain.model.*
-import org.dukecon.domain.repository.ConferenceRepository
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 
@@ -35,8 +35,12 @@ class DukeconDataKtorRepository(
     }
 
     override suspend fun getEventDates(): List<GMTDate> {
-        return listOf(GMTDate())
-
+        return sessions!!.map {
+            toEvent(it)
+        }.distinctBy { it.startTime.dayOfMonth }
+                .map {
+                    it.startTime
+                }.sortedBy { it.dayOfMonth }
     }
 
     override suspend fun getSpeakers(): List<Speaker> {
@@ -44,7 +48,7 @@ class DukeconDataKtorRepository(
     }
 
     override suspend fun getSpeaker(id: String): Speaker {
-        return Speaker("1", "","", "", "", "", "")
+        return Speaker("1", "", "", "", "", "", "")
     }
 
     override suspend fun saveSpeakers(speakers: List<Speaker>) {
@@ -101,7 +105,7 @@ class DukeconDataKtorRepository(
 
     override suspend fun update() {
         try {
-            val conference = api.getConference ("acna2019.json")
+            val conference = api.getConference("acna2019.json")
             sessions = conference.events.map {
                 toSessionModel(it)
             }
@@ -115,8 +119,11 @@ class DukeconDataKtorRepository(
         return SessionModel(it.id, it.title, it.typeId, it.abstractText, it.start, it.end, it.locationId, emptyList())
     }
 
-    private fun toEvent(it: SessionModel ):org.dukecon.domain.model.Event  {
-        return Event(it.id, it.title, it.descriptionText, it.startsAt ?: GMTDate(),
+    private fun toEvent(it: SessionModel): org.dukecon.domain.model.Event {
+        return Event(it.id,
+                it.title,
+                it.descriptionText,
+                it.startsAt ?: GMTDate(),
                 it.endsAt ?: GMTDate(),
                 emptyList(),
                 Favorite("1", 1, false),

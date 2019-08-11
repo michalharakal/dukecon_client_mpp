@@ -2,10 +2,8 @@ package org.dukecon.android.ui.features.eventdetail
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +16,7 @@ import org.dukecon.android.ui.features.feedback.FeedbackDialog
 import org.dukecon.android.ui.features.speaker.SpeakerAdapter
 import org.dukecon.android.ui.features.speakerdetail.SpeakerNavigator
 import org.dukecon.android.ui.utils.DrawableUtils
-import org.dukecon.data.source.ConferenceConfiguration
+import org.dukecon.configuration.ConferenceConfiguration
 import org.dukecon.domain.features.time.CurrentTimeProvider
 import org.dukecon.presentation.feature.eventdetail.EventDetailContract
 import org.dukecon.presentation.model.EventView

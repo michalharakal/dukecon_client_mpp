@@ -1,4 +1,4 @@
-package org.dukecon.repository.cache
+package org.dukecon.data.cache
 
 import org.dukecon.date.GMTDate
 import org.dukecon.date.Month

@@ -15,13 +15,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.dukecon.android.ui.features.login.DummyDukeconAuthManager
 import org.dukecon.android.ui.features.login.SettingsTokenStorage
 import org.dukecon.android.ui.storage.AndroidStorage
-import org.dukecon.common.data.DukeconDataKtorRepository
 import org.dukecon.domain.aspects.auth.AuthManager
 import org.dukecon.domain.aspects.storage.ApplicationStorage
 import org.dukecon.domain.aspects.twitter.TwitterLinks
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.IoContextProvider
+import org.dukecon.repository.data.DukeconDataKtorRepository
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton

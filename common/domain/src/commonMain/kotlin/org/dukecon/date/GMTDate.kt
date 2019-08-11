@@ -130,4 +130,3 @@ operator fun GMTDate.plus(milliseconds: Long): GMTDate = GMTDate(timestamp + mil
  * Subtracts the specified number of [milliseconds]
  */
 operator fun GMTDate.minus(milliseconds: Long): GMTDate = GMTDate(timestamp - milliseconds)
-

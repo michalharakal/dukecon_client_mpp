@@ -1,9 +1,5 @@
 package org.dukecon.date
 
-/*
- * Copyright 2014-2019 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
- */
-
 import java.util.*
 
 private val GMT_TIMEZONE = TimeZone.getTimeZone("GMT")

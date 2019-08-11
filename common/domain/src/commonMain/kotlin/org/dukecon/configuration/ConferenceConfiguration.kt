@@ -1,4 +1,4 @@
-package org.dukecon.data.source
+package org.dukecon.configuration
 
 interface ConferenceConfiguration {
     val baseUrl: String
