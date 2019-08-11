@@ -16,9 +16,6 @@ import org.dukecon.android.ui.features.login.DummyDukeconAuthManager
 import org.dukecon.android.ui.features.login.SettingsTokenStorage
 import org.dukecon.android.ui.storage.AndroidStorage
 import org.dukecon.common.data.DukeconDataKtorRepository
-import org.dukecon.data.mapper.*
-import org.dukecon.data.repository.EventRemote
-import org.dukecon.data.source.EventRemoteDataStore
 import org.dukecon.domain.aspects.auth.AuthManager
 import org.dukecon.domain.aspects.storage.ApplicationStorage
 import org.dukecon.domain.aspects.twitter.TwitterLinks
@@ -48,11 +45,6 @@ open class ApplicationModule {
     }
 
     @Provides
-    internal fun provideEventMapper(): EventMapper {
-        return EventMapper()
-    }
-
-    @Provides
     fun provideSpeakerMapper(): org.dukecon.presentation.mapper.SpeakerMapper {
         return org.dukecon.presentation.mapper.SpeakerMapper()
     }
@@ -62,11 +54,11 @@ open class ApplicationModule {
         return org.dukecon.presentation.mapper.SpeakerDetailMapper(twitterLinks)
     }
 
-
     @Provides
     internal fun providePreEventMapper(speakersMapper: org.dukecon.presentation.mapper.SpeakerMapper): org.dukecon.presentation.mapper.EventMapper {
         return org.dukecon.presentation.mapper.EventMapper(speakersMapper)
     }
+
 
     class DO_NOT_VERIFY_IMP : javax.net.ssl.HostnameVerifier {
         override fun verify(p0: String?, p1: javax.net.ssl.SSLSession?): Boolean {
@@ -126,10 +118,13 @@ open class ApplicationModule {
     }
 
 
+    /*
     @Provides
     internal fun provideEventRemoteDataStore(eventRemote: EventRemote): EventRemoteDataStore {
         return EventRemoteDataStore(eventRemote)
     }
+
+*/
 
     @Provides
     internal fun provideioContextProvider(): IoContextProvider {
@@ -142,27 +137,6 @@ open class ApplicationModule {
                 return Dispatchers.IO
             }
         }
-    }
-
-
-    @Provides
-    internal fun provideKeycloakMapper(): KeycloakMapper {
-        return KeycloakMapper()
-    }
-
-    @Provides
-    internal fun provideFeedbackMapper(): FeedbackMapper {
-        return FeedbackMapper()
-    }
-
-    @Provides
-    internal fun provideFavoriteMapper(): FavoriteMapper {
-        return FavoriteMapper()
-    }
-
-    @Provides
-    internal fun provideMetaDateMapper(): MetaDateMapper {
-        return MetaDateMapper()
     }
 
 

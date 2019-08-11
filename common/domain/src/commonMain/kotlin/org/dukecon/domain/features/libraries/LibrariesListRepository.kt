@@ -1,4 +1,4 @@
-package org.dukecon.data.repository
+package org.dukecon.domain.features.libraries
 
 import org.dukecon.domain.model.Library
 import org.dukecon.domain.repository.LibrariesRepository

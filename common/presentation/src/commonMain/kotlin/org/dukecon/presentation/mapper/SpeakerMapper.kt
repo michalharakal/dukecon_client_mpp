@@ -8,7 +8,7 @@ import org.dukecon.presentation.model.SpeakerView
  * Map a [SpeakerView] to and from a [Speaker] instance when data is moving between
  * this layer and the Domain layer
  */
-open class SpeakerMapper constructor() : Mapper<SpeakerView, Speaker> {
+class SpeakerMapper: Mapper<SpeakerView, Speaker> {
 
     /**
      * Map a [Speaker] instance to a [EventView] instance

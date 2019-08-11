@@ -79,17 +79,10 @@ kapt {
     correctErrorTypes = true
 }
 
-configurations.all {
-    resolutionStrategy {
-        force "org.jetbrains.kotlin:kotlin-stdlib:1.3.41"
-    }
-}
-
 dependencies {
     apacheconApi project(':common:apachecon')
     apacheconApi project(':common:presentation')
     apacheconApi project(':common:domain')
-    apacheconApi project(':common:data')
     apacheconApi project(':common:dukecon')
 
     implementation 'javax.inject:javax.inject'
@@ -105,14 +98,13 @@ dependencies {
     implementation 'com.google.android.material:material'
     implementation 'com.jakewharton.threetenabp:threetenabp'
     implementation "io.ktor:ktor-client-android"
-    implementation 'io.ktor:ktor-client-okhttp'
     implementation 'io.ktor:ktor-client-json-jvm'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'com.squareup.picasso:picasso'
+    implementation 'androidx.browser:browser'
     implementation 'com.squareup.okhttp3:logging-interceptor'
     implementation 'com.squareup.retrofit2:retrofit'
     implementation 'com.squareup.retrofit2:converter-gson'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android'
 
     kapt 'com.google.dagger:dagger-android-processor:2.22.1'
     kapt 'com.google.dagger:dagger-compiler:2.22.1'

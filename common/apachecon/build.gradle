@@ -8,12 +8,13 @@ configurations {
     compileClasspath
 }
 
+archivesBaseName = 'apachecon'
+
 kotlin {
     sourceSets {
         commonMain {
             dependencies {
                 api project(':common:domain')
-                api project(':common:data')
 
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"

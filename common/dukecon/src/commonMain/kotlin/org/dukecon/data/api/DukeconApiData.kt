@@ -161,20 +161,20 @@ data class Keycloak(
 
 // Synthetic class name
 @Serializable
-data class DefinitionsAudienceNames(val de:String, val en:String)
+data class DefinitionsAudienceNames(val de:String = "", val en:String = "")
 
 // Synthetic class name
 @Serializable
-data class DefinitionsEventTypeNames(val de:String, val en:String)
+data class DefinitionsEventTypeNames(val de:String = "", val en:String = "")
 
 // Synthetic class name
 @Serializable
-data class DefinitionsLanguageNames(val de:String, val en:String)
+data class DefinitionsLanguageNames(val de:String = "", val en:String = "")
 
 // Synthetic class name
 @Serializable
-data class DefinitionsTrackNames(val de:String, val en:String)
+data class DefinitionsTrackNames(val de:String = "", val en:String = "")
 
 // Synthetic class name
 @Serializable
-data class DefinitionsLocationNames(val de:String, val en:String)
+data class DefinitionsLocationNames(val de:String = "", val en:String = "")

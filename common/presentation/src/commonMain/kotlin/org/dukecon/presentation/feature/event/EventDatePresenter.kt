@@ -19,13 +19,13 @@ open class EventDatePresenter constructor(
     private val onRefreshListener: () -> Unit = this::refreshDataFromRepo
 
     override fun onAttach(view: EventDateListContract.View) {
-        conferenceRepository.onRefreshListeners += onRefreshListener
+        //conferenceRepository.onRefreshListeners += onRefreshListener
         this.view = view
         refreshDataFromRepo()
     }
 
     override fun onDetach() {
-        conferenceRepository.onRefreshListeners -= onRefreshListener
+        //conferenceRepository.onRefreshListeners -= onRefreshListener
     }
 
     private var initial: Boolean = true

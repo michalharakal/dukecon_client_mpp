@@ -101,6 +101,6 @@ class SpeakerDetailView(context: Context, attrs: AttributeSet? = null, defStyle:
             github.visibility = GONE
         }
 
-        Picasso.with(context).load(speaker.avatar).placeholder(R.drawable.ph_speaker).into(image)
+        Picasso.get().load(speaker.avatar).placeholder(R.drawable.ph_speaker).into(image)
     }
 }

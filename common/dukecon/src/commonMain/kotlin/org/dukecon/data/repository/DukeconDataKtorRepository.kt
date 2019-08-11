@@ -1,4 +1,4 @@
-package org.dukecon.common.data
+package org.dukecon.repository.data
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -11,7 +11,6 @@ import org.dukecon.repository.api.Event
 import org.dukecon.repository.cache.SessionModel
 import org.dukecon.domain.model.*
 import org.dukecon.domain.repository.ConferenceRepository
-import org.dukecon.repository.api.ApiAdapter
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 
@@ -84,7 +83,9 @@ class DukeconDataKtorRepository(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private val api = DukeconApi("https://programm.javaland.eu/2019/rest", "javaland2019")
+    //private val api = DukeconApi("https://programm.javaland.eu/2019/rest", "javaland2019")
+    private val api = DukeconApi("https://www.apachecon.com/acna19/s/rest/", "acna2019.json")
+
 
     var sessions: List<SessionModel>? by bindToPreferencesByKey("settingsKey", SessionModel.serializer().list)
     //var favorites: List<SessionModel>? by bindToPreferencesByKey("favoritesKey", SessionModel.serializer().list)
@@ -100,7 +101,7 @@ class DukeconDataKtorRepository(
 
     override suspend fun update() {
         try {
-            val conference = api.getConference ("javaland2019")
+            val conference = api.getConference ("acna2019.json")
             sessions = conference.events.map {
                 toSessionModel(it)
             }
