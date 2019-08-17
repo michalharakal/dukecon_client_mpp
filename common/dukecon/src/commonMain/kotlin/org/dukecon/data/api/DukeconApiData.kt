@@ -1,4 +1,4 @@
-package org.dukecon.repository.api
+package org.dukecon.data.api
 
 import kotlinx.serialization.Serializable
 

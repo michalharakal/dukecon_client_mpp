@@ -1,4 +1,4 @@
-package org.jetbrains.kotlinconf.data
+package org.dukecon.data.cache
 
 
 enum class SessionRating(val value: Int) {

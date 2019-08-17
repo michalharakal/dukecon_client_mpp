@@ -5,6 +5,7 @@ plugins {
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'co.touchlab.kotlinxcodesync'
+apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
 
 apply from: "$rootDir/versions.gradle"
 
@@ -13,6 +14,8 @@ archivesBaseName = 'dukecon'
 configurations {
     compileClasspath
 }
+
+version = "1.0"
 
 kotlin {
     jvm {
@@ -24,7 +27,7 @@ kotlin {
     }
     targets {
         fromPreset(presets.jvm, 'jvm')
-        fromPreset(presets.macosX64, 'macosX64')
+        fromPreset(presets.macosX64, 'macos')
 
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
                                ? presets.iosArm64 : presets.iosX64
@@ -40,6 +43,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation project(':common:domain')
+                implementation project(':common:presentation')
 
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
@@ -103,9 +107,11 @@ kotlin {
             dependencies {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
 
+                implementation "io.ktor:ktor-client-ios"
                 implementation "io.ktor:ktor-client-core-native"
-                implementation "io.ktor:ktor-client-serialization-native"
+                implementation "io.ktor:ktor-client-json-native"
                 implementation "io.ktor:ktor-client-logging-native"
+                implementation "io.ktor:ktor-client-serialization-native"
             }
         }
     }
@@ -116,24 +122,16 @@ kotlin {
             }
         }
     }
-}
 
-task packForXCode(type: Sync) {
-    final File frameworkDir = new File(rootDir, "xcode-frameworks")
-    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
-    final def framework = kotlin.targets.ios.binaries.getFramework(archivesBaseName, mode)
-
-    inputs.property "mode", mode
-    dependsOn framework.linkTask
-
-    from { framework.outputFile.parentFile }
-    into frameworkDir
-
-    doLast {
-        new File(frameworkDir, 'gradlew').with {
-            text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
-            setExecutable(true)
-        }
+    cocoapods {
+        // Configure fields required by CocoaPods.
+        summary = "Lots of Droidcon Stuff"
+        homepage = "https://github.com/touchlab/DroidconKotlin"
     }
 }
-tasks.build.dependsOn packForXCode
+
+
+xcode {
+    projectPath = "../../iosApp/iosApp.xcodeproj"
+    target = "iosApp"
+}

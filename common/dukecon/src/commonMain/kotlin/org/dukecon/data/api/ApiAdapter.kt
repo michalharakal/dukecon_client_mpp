@@ -9,6 +9,7 @@ import io.ktor.client.request.*
 import io.ktor.client.response.*
 import io.ktor.http.*
 import kotlinx.io.core.*
+import org.dukecon.data.api.Conference
 
 /**
  * Adapter to handle backend API and manage auth information.

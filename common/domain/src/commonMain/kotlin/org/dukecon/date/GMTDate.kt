@@ -61,6 +61,7 @@ enum class Month(val value: String) {
          * Lookup an instance by [ordinal]
          */
         fun from(ordinal: Int): Month = Month.values()[ordinal]
+
         /**
          * Lookup an instance by short month name [Month.value]
          */
@@ -130,3 +131,9 @@ operator fun GMTDate.plus(milliseconds: Long): GMTDate = GMTDate(timestamp + mil
  * Subtracts the specified number of [milliseconds]
  */
 operator fun GMTDate.minus(milliseconds: Long): GMTDate = GMTDate(timestamp - milliseconds)
+
+fun GMTDate.isAfter(other: GMTDate): Boolean = timestamp > other.timestamp
+
+fun GMTDate.toMillis() = timestamp
+
+

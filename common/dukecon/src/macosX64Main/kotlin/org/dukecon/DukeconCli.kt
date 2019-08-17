@@ -1,7 +1,7 @@
 package org.dukecon
 
 import kotlinx.coroutines.runBlocking
-import org.dukecon.repository.api.DukeconApi
+import org.dukecon.data.api.DukeconApi
 
 fun main()  {
     val api = DukeconApi("https://www.apachecon.com/acna19/s/rest/", "acna2019.json")

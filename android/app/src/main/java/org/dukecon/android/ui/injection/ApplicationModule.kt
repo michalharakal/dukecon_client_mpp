@@ -14,14 +14,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.dukecon.android.ui.features.login.DummyDukeconAuthManager
 import org.dukecon.android.ui.features.login.SettingsTokenStorage
-import org.dukecon.android.ui.storage.AndroidStorage
+import org.dukecon.data.repository.DukeconDataKtorRepository
 import org.dukecon.domain.aspects.auth.AuthManager
 import org.dukecon.domain.aspects.storage.ApplicationStorage
 import org.dukecon.domain.aspects.twitter.TwitterLinks
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.IoContextProvider
-import org.dukecon.repository.data.DukeconDataKtorRepository
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -32,6 +31,8 @@ import kotlin.coroutines.CoroutineContext
  */
 @Module
 open class ApplicationModule {
+
+    private val appStorage: ApplicationStorage = ApplicationStorage()
 
     @Provides
     fun provideContext(application: Application): Context {
@@ -145,18 +146,18 @@ open class ApplicationModule {
         return dukeconAuthManager
     }
 
+    @Provides
+    @Singleton
+    internal fun  provideApplicationStorage(): ApplicationStorage {
+        return appStorage
+    }
+
 
     @Provides
     @Singleton
-    internal fun provideEventRepository(settings: ApplicationStorage): ConferenceRepository {
-        return DukeconDataKtorRepository("", "", settings)
+    internal fun provideEventRepository(): ConferenceRepository {
+        return DukeconDataKtorRepository("", "", appStorage)
     }
-
-    @Provides
-    fun providesAppStorage(context: Context): ApplicationStorage {
-        return AndroidStorage(context)
-    }
-
 
     @Provides
     fun providesTokensStorage(settings: SettingsTokenStorage): TokensStorage {

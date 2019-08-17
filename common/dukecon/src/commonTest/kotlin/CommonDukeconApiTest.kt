@@ -1,5 +1,5 @@
 import kotlinx.coroutines.runBlocking
-import org.dukecon.repository.api.DukeconApi
+import org.dukecon.data.api.DukeconApi
 
 import kotlin.test.Test
 import kotlin.test.assertTrue

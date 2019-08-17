@@ -1,38 +1,57 @@
-package org.dukecon.repository.data
+package org.dukecon.data.repository
 
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import kotlinx.serialization.serializer
+import org.dukecon.data.api.DukeconApi
+import org.dukecon.data.api.Event
+import org.dukecon.data.cache.SessionModel
+import org.dukecon.data.cache.SpeakerModel
 import org.dukecon.date.GMTDate
 import org.dukecon.domain.aspects.storage.ApplicationStorage
 import org.dukecon.domain.model.*
 import org.dukecon.domain.repository.ConferenceRepository
-import org.dukecon.repository.api.DukeconApi
-import org.dukecon.repository.api.Event
-import org.dukecon.repository.cache.SessionModel
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 
-
 class DukeconDataKtorRepository(
         endPoint: String,
-        uid: String,
+        private val conferenceId: String,
         private val settings: ApplicationStorage
 ) : ConferenceRepository {
-    override suspend fun saveEvents(events: List<org.dukecon.domain.model.Event>) {
-
+    override fun update(completion: (String) -> Unit) {
+        MainScope().launch {
+            update()
+            completion("")
+        }
     }
 
-    override suspend fun getEvents(day: Int): List<org.dukecon.domain.model.Event> {
+    override fun getEvents(): List<org.dukecon.domain.model.Event> {
         return if (sessions != null) {
             sessions!!.map {
                 toEvent(it)
             }
+                    .sortedBy { it.startTime }
         } else {
             emptyList()
         }
     }
+
+    //private val api = DukeconApi("https://programm.javaland.eu/2019/rest", "javaland2019")
+    // private val api = DukeconApi("https://www.apachecon.com/acna19/s/rest/", "acna2019.json")
+    private val api = DukeconApi(endPoint, conferenceId)
+
+    var sessions: List<SessionModel>? by bindToPreferencesByKey("sessions", SessionModel.serializer().list)
+    var speakers: List<SpeakerModel>? by bindToPreferencesByKey("speakers", SpeakerModel.serializer().list)
+    //var favorites: List<SessionModel>? by bindToPreferencesByKey("favoritesKey", SessionModel.serializer().list)
+    //var votes: List<Vote>? by bindToPreferencesByKey("votesKey", Vote.serializer().list)
+    var userId: String? by bindToPreferencesByKey("userIdKey", String.serializer())
+
+
+    override var onRefreshListeners: List<() -> Unit> = emptyList()
 
     override suspend fun getEventDates(): List<GMTDate> {
         return sessions!!.map {
@@ -43,13 +62,51 @@ class DukeconDataKtorRepository(
                 }.sortedBy { it.dayOfMonth }
     }
 
-    override suspend fun getSpeakers(): List<Speaker> {
-        return emptyList()
+    override suspend fun getEvents(day: Int): List<org.dukecon.domain.model.Event> {
+        return if (sessions != null) {
+            sessions!!.filter { it.startsAt.dayOfMonth == day }
+                    .map {
+                        toEvent(it)
+                    }
+                    .sortedBy { it.startTime }
+        } else {
+            emptyList()
+        }
     }
 
-    override suspend fun getSpeaker(id: String): Speaker {
-        return Speaker("1", "", "", "", "", "", "")
+    override suspend fun getEvent(id: String): org.dukecon.domain.model.Event? {
+        return if (sessions != null) {
+            toEvent(sessions!!.first { it.id == id })
+        } else {
+            null
+        }
     }
+
+    override suspend fun getSpeakers(): List<Speaker> {
+        return speakers!!.map {
+            toSpeaker(it)
+        }.sortedBy { it.name }
+    }
+
+    override suspend fun getSpeaker(id: String): Speaker? {
+        return speakers!!.find { it.id == id }?.let { toSpeaker(it) }
+    }
+
+    override suspend fun saveEvents(events: List<org.dukecon.domain.model.Event>) {
+
+    }
+
+
+    private fun toSpeaker(it: SpeakerModel): Speaker {
+        return Speaker(id = it.id,
+                name = it.fullName,
+                title = it.tagLine,
+                twitter = "",
+                bio = it.bio,
+                website = "",
+                avatar = "")
+    }
+
 
     override suspend fun saveSpeakers(speakers: List<Speaker>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -60,10 +117,6 @@ class DukeconDataKtorRepository(
     }
 
     override suspend fun saveRooms(rooms: List<Room>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override suspend fun getEvent(id: String): org.dukecon.domain.model.Event {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -87,32 +140,35 @@ class DukeconDataKtorRepository(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    //private val api = DukeconApi("https://programm.javaland.eu/2019/rest", "javaland2019")
-    private val api = DukeconApi("https://www.apachecon.com/acna19/s/rest/", "acna2019.json")
-
-
-    var sessions: List<SessionModel>? by bindToPreferencesByKey("settingsKey", SessionModel.serializer().list)
-    //var favorites: List<SessionModel>? by bindToPreferencesByKey("favoritesKey", SessionModel.serializer().list)
-    //var votes: List<Vote>? by bindToPreferencesByKey("votesKey", Vote.serializer().list)
-    var userId: String? by bindToPreferencesByKey("userIdKey", String.serializer())
-
-    init {
-        userId = "javaland2019"
-    }
-
-    override var onRefreshListeners: List<() -> Unit> = emptyList()
-
 
     override suspend fun update() {
         try {
-            val conference = api.getConference("acna2019.json")
+            val conference = api.getConference(conferenceId)
             sessions = conference.events.map {
                 toSessionModel(it)
+            }
+            speakers = conference.speakers.map {
+                toSpeakernModel(it)
             }
 
         } catch (source: Throwable) {
             println(source.toString())
         }
+    }
+
+    private fun toSpeakernModel(it: org.dukecon.data.api.Speaker): SpeakerModel {
+        return SpeakerModel(
+                id = it.id,
+                firstName = it.firstname,
+                lastName = it.lastname,
+                profilePicture = it.photoId,
+                sessions = emptyList(),
+                tagLine = "",
+                isTopSpeaker = true,
+                bio = it.bio,
+                fullName = it.name,
+                links = emptyList())
+        // listOf(it.twitter, it.linkedin, it.facebook, it.website, it.xing)
     }
 
     private fun toSessionModel(it: Event): SessionModel {
@@ -138,24 +194,6 @@ class DukeconDataKtorRepository(
                 false,
                 0)
     }
-
-    /*
-    override fun getRating(sessionId: String): SessionRating? {
-        return SessionRating.OK
-    }
-
-    override suspend fun addRating(sessionId: String, rating: SessionRating) {
-    }
-
-    override suspend fun removeRating(sessionId: String) {
-    }
-
-    override suspend fun setFavorite(sessionId: String, isFavorite: Boolean) {
-    }
-
-    override fun acceptPrivacyPolicy() {
-    }
-*/
 
     private inline fun <reified T : Any> read(key: String, elementSerializer: KSerializer<T>) = settings
             .getString(key)

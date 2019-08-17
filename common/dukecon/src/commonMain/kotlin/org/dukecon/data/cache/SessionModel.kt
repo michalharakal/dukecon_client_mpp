@@ -1,13 +1,8 @@
-package org.dukecon.repository.cache
+package org.dukecon.data.cache
 
 import kotlinx.serialization.*
-import org.dukecon.data.cache.AllData
-import org.dukecon.data.cache.parseDate
 import org.dukecon.date.GMTDate
-import org.jetbrains.kotlinconf.data.CategoryItem
 import org.jetbrains.kotlinconf.data.Room
-import org.jetbrains.kotlinconf.data.Session
-import org.jetbrains.kotlinconf.data.Speaker
 
 @Serializable
 
@@ -16,18 +11,18 @@ class SessionModel(
         val title: String,
         val category: String?,
         val descriptionText: String,
-        val startsAtStr: String?,
-        val endsAtStr: String?,
+        val startsAtStr: String,
+        val endsAtStr: String,
         val room: String?,
-        val speakers: List<Speaker>
+        val speakers: List<SpeakerModel>
 ) {
     @Transient
-    val startsAt: GMTDate?
-        get() = startsAtStr?.parseDate()
+    val startsAt: GMTDate
+        get() = startsAtStr.parseDate()
 
     @Transient
-    val endsAt: GMTDate?
-        get() = endsAtStr?.parseDate()
+    val endsAt: GMTDate
+        get() = endsAtStr.parseDate()
 
     companion object {
         fun forSession(all: AllData, sessionId: String): SessionModel {
@@ -47,12 +42,12 @@ class SessionModel(
 
         private fun forSession(
                 briefSession: Session,
-                speakerProvider: (String) -> Speaker?,
+                speakerProvider: (String) -> SpeakerModel?,
                 categoryProvider: (Int) -> CategoryItem?,
                 roomProvider: (Int) -> Room
         ): SessionModel {
-            val startsAt = briefSession.startsAt
-            val endsAt = briefSession.endsAt
+            val startsAt = briefSession.startsAt ?: GMTDate().toString()
+            val endsAt = briefSession.endsAt ?: GMTDate().toString()
 
             return SessionModel(
                     id = briefSession.id,

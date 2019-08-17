@@ -1,4 +1,4 @@
-package org.dukecon.repository.api
+package org.dukecon.data.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature

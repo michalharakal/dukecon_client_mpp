@@ -1,0 +1,699 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07FB512379A12C3C409794EA /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47288E9E702DAAD49EA75B77 /* Pods_iosApp.framework */; };
+		2860136F2301F6FD0031D1ED /* ScheduleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2860136E2301F6FD0031D1ED /* ScheduleListCell.swift */; };
+		286013732301FEDA0031D1ED /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286013722301FEDA0031D1ED /* Session.swift */; };
+		28E8A5152301DD22006C20B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A5142301DD22006C20B5 /* AppDelegate.swift */; };
+		28E8A5172301DD22006C20B5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A5162301DD22006C20B5 /* FirstViewController.swift */; };
+		28E8A5192301DD22006C20B5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A5182301DD22006C20B5 /* SecondViewController.swift */; };
+		28E8A51C2301DD22006C20B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E8A51A2301DD22006C20B5 /* Main.storyboard */; };
+		28E8A51E2301DD25006C20B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28E8A51D2301DD25006C20B5 /* Assets.xcassets */; };
+		28E8A5212301DD25006C20B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E8A51F2301DD25006C20B5 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0095BDE1B8D397B8DC64B808 /* EventDataStoreFactoryTest.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = EventDataStoreFactoryTest.kt; path = ../common/dukecon/src/test/java/org/dukecon/data/source/EventDataStoreFactoryTest.kt; sourceTree = "<group>"; };
+		0AA08CD2701DD12422F6E549 /* Link.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Link.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Link.kt; sourceTree = "<group>"; };
+		0D5144B4696B713B942850FA /* AllData.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = AllData.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/AllData.kt; sourceTree = "<group>"; };
+		0E09B11F8321F13573EF1916 /* DukeconDataKtorRepository.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DukeconDataKtorRepository.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/repository/DukeconDataKtorRepository.kt; sourceTree = "<group>"; };
+		22BF250952E084A0D8755619 /* Session.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Session.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Session.kt; sourceTree = "<group>"; };
+		2860136E2301F6FD0031D1ED /* ScheduleListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleListCell.swift; sourceTree = "<group>"; };
+		286013722301FEDA0031D1ED /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		28E8A5112301DD22006C20B5 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28E8A5142301DD22006C20B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		28E8A5162301DD22006C20B5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		28E8A5182301DD22006C20B5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		28E8A51B2301DD22006C20B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		28E8A51D2301DD25006C20B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28E8A5202301DD25006C20B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		28E8A5222301DD25006C20B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D6443FA4F6A701A0DC9F410 /* DateFormat.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DateFormat.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/DateFormat.kt; sourceTree = "<group>"; };
+		44A5F2ACBE5E46ECE3851882 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		45D70C0053CC41885151C118 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		46865E50B914D0A0ED4059B9 /* SpeakerModel.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = SpeakerModel.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/SpeakerModel.kt; sourceTree = "<group>"; };
+		47288E9E702DAAD49EA75B77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		484579303F1783095C49C58B /* CategoryItem.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = CategoryItem.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/CategoryItem.kt; sourceTree = "<group>"; };
+		51B2875540CB1CC48C559CB9 /* ExpectSuccess.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = ExpectSuccess.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/api/ExpectSuccess.kt; sourceTree = "<group>"; };
+		57984EA9C11CD561DC7ABB9E /* Category.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Category.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Category.kt; sourceTree = "<group>"; };
+		60C5731652F13F241BC68E15 /* Favorite.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Favorite.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Favorite.kt; sourceTree = "<group>"; };
+		681122E3DD779C24A55FA834 /* DukeconKtorRepositoryTest.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DukeconKtorRepositoryTest.kt; path = ../common/dukecon/src/jvmTest/kotlin/org/dukecon/repository/DukeconKtorRepositoryTest.kt; sourceTree = "<group>"; };
+		690F3AB0B7E2F9E0A4311506 /* Errors.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Errors.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/api/Errors.kt; sourceTree = "<group>"; };
+		772E6AEED227BC7420CC643F /* CommonDukeconApiTest.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = CommonDukeconApiTest.kt; path = ../common/dukecon/src/commonTest/kotlin/CommonDukeconApiTest.kt; sourceTree = "<group>"; };
+		8EF4C78F3C100AEF46F5CD96 /* DukeconApi.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DukeconApi.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/api/DukeconApi.kt; sourceTree = "<group>"; };
+		9027108DD52DAB3F296CABA7 /* DateJvmTest.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DateJvmTest.kt; path = ../common/dukecon/src/jvmTest/kotlin/org/dukecon/date/DateJvmTest.kt; sourceTree = "<group>"; };
+		9766981E58CB9E78F78F04AA /* SessionRating.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = SessionRating.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/SessionRating.kt; sourceTree = "<group>"; };
+		99451C643D62C9FDDC2ADFFE /* DukeconApiTest.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DukeconApiTest.kt; path = ../common/dukecon/src/jvmTest/kotlin/org/dukecon/DukeconApiTest.kt; sourceTree = "<group>"; };
+		CD1DE815386C6BE3483A6F16 /* Vote.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Vote.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Vote.kt; sourceTree = "<group>"; };
+		D5054B21A3F46AFFBB494CB8 /* SessionModel.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = SessionModel.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/SessionModel.kt; sourceTree = "<group>"; };
+		D6C3092558ADAF9FFEA6D09E /* Room.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Room.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Room.kt; sourceTree = "<group>"; };
+		DA884553462734C30AB93E9D /* QuestionAnswer.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = QuestionAnswer.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/QuestionAnswer.kt; sourceTree = "<group>"; };
+		E6127C1CAA41A8AF456BD45A /* DukeconCli.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DukeconCli.kt; path = ../common/dukecon/src/macosX64Main/kotlin/org/dukecon/DukeconCli.kt; sourceTree = "<group>"; };
+		EBEA9D0E6090870AB509E461 /* ApiAdapter.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = ApiAdapter.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/api/ApiAdapter.kt; sourceTree = "<group>"; };
+		F4659F623DEBB4EE32D1DF8F /* Question.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = Question.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/cache/Question.kt; sourceTree = "<group>"; };
+		F8F5307E014DB7E1DA150FE7 /* DukeconApiData.kt */ = {isa = PBXFileReference; includeInIndex = 1; name = DukeconApiData.kt; path = ../common/dukecon/src/commonMain/kotlin/org/dukecon/data/api/DukeconApiData.kt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28E8A50E2301DD22006C20B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FB512379A12C3C409794EA /* Pods_iosApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12EB011C8364B5F2CBB4A08B /* Kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				D4AEDAB894C0406885C93A4E /* commonMain */,
+				9BA5983BF51C3BC453DBEABE /* commonTest */,
+				6F10DBA508B60C43D710A76C /* jvmTest */,
+				D61F4360A0BC1D91C2CF5822 /* macosX64Main */,
+				AC6F98666DF38F556C321312 /* test */,
+			);
+			name = Kotlin;
+			sourceTree = "<group>";
+		};
+		1575A9898DAF189C79248763 /* dukecon */ = {
+			isa = PBXGroup;
+			children = (
+				ADCF76CAC193E0E0550DB879 /* data */,
+			);
+			name = dukecon;
+			sourceTree = "<group>";
+		};
+		1D8670EAD06E1611F9BC43B8 /* dukecon */ = {
+			isa = PBXGroup;
+			children = (
+				7C18AFF0E8AD736FE941CE21 /* data */,
+			);
+			name = dukecon;
+			sourceTree = "<group>";
+		};
+		2860136D2301F6E60031D1ED /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				28E8A5162301DD22006C20B5 /* FirstViewController.swift */,
+				286013722301FEDA0031D1ED /* Session.swift */,
+				2860136E2301F6FD0031D1ED /* ScheduleListCell.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		28E8A5082301DD22006C20B5 = {
+			isa = PBXGroup;
+			children = (
+				28E8A5132301DD22006C20B5 /* iosApp */,
+				28E8A5122301DD22006C20B5 /* Products */,
+				62D982ACE69AB3D7F7E4F79F /* Pods */,
+				2EA2A258CAF9CFB76F96F73C /* Frameworks */,
+				12EB011C8364B5F2CBB4A08B /* Kotlin */,
+			);
+			sourceTree = "<group>";
+		};
+		28E8A5122301DD22006C20B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28E8A5112301DD22006C20B5 /* iosApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28E8A5132301DD22006C20B5 /* iosApp */ = {
+			isa = PBXGroup;
+			children = (
+				2860136D2301F6E60031D1ED /* Schedule */,
+				28E8A5142301DD22006C20B5 /* AppDelegate.swift */,
+				28E8A5182301DD22006C20B5 /* SecondViewController.swift */,
+				28E8A51A2301DD22006C20B5 /* Main.storyboard */,
+				28E8A51D2301DD25006C20B5 /* Assets.xcassets */,
+				28E8A51F2301DD25006C20B5 /* LaunchScreen.storyboard */,
+				28E8A5222301DD25006C20B5 /* Info.plist */,
+			);
+			path = iosApp;
+			sourceTree = "<group>";
+		};
+		2EA2A258CAF9CFB76F96F73C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47288E9E702DAAD49EA75B77 /* Pods_iosApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3D86A807B97838B671103756 /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				800D04D281B3D63853DD725A /* org */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		4C65B05023E13B6645329E25 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				EBEA9D0E6090870AB509E461 /* ApiAdapter.kt */,
+				8EF4C78F3C100AEF46F5CD96 /* DukeconApi.kt */,
+				F8F5307E014DB7E1DA150FE7 /* DukeconApiData.kt */,
+				690F3AB0B7E2F9E0A4311506 /* Errors.kt */,
+				51B2875540CB1CC48C559CB9 /* ExpectSuccess.kt */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
+		62D982ACE69AB3D7F7E4F79F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				45D70C0053CC41885151C118 /* Pods-iosApp.debug.xcconfig */,
+				44A5F2ACBE5E46ECE3851882 /* Pods-iosApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		68CBBA3F62E4CEBFAB538563 /* dukecon */ = {
+			isa = PBXGroup;
+			children = (
+				E6127C1CAA41A8AF456BD45A /* DukeconCli.kt */,
+			);
+			name = dukecon;
+			sourceTree = "<group>";
+		};
+		695029B48B5DC7FBC3CBDDAB /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				681122E3DD779C24A55FA834 /* DukeconKtorRepositoryTest.kt */,
+			);
+			name = repository;
+			sourceTree = "<group>";
+		};
+		6F10DBA508B60C43D710A76C /* jvmTest */ = {
+			isa = PBXGroup;
+			children = (
+				3D86A807B97838B671103756 /* kotlin */,
+			);
+			name = jvmTest;
+			sourceTree = "<group>";
+		};
+		77A44D7DE21A0119FE7733CE /* java */ = {
+			isa = PBXGroup;
+			children = (
+				F94BA0679CCC647925B0F891 /* org */,
+			);
+			name = java;
+			sourceTree = "<group>";
+		};
+		7C18AFF0E8AD736FE941CE21 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				A8C711649FF293A9BC814716 /* source */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		800D04D281B3D63853DD725A /* org */ = {
+			isa = PBXGroup;
+			children = (
+				E5D9CBD32850B2AA332BCDB8 /* dukecon */,
+			);
+			name = org;
+			sourceTree = "<group>";
+		};
+		920F8FECC503957BCC229798 /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				0E09B11F8321F13573EF1916 /* DukeconDataKtorRepository.kt */,
+			);
+			name = repository;
+			sourceTree = "<group>";
+		};
+		9BA5983BF51C3BC453DBEABE /* commonTest */ = {
+			isa = PBXGroup;
+			children = (
+				F96A8242D3BF6D88CFC84995 /* kotlin */,
+			);
+			name = commonTest;
+			sourceTree = "<group>";
+		};
+		A8C711649FF293A9BC814716 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				0095BDE1B8D397B8DC64B808 /* EventDataStoreFactoryTest.kt */,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
+		AC6F98666DF38F556C321312 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				77A44D7DE21A0119FE7733CE /* java */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		ADCF76CAC193E0E0550DB879 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				4C65B05023E13B6645329E25 /* api */,
+				C965AFB8E210A664C3750A93 /* cache */,
+				920F8FECC503957BCC229798 /* repository */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		B9A55D4C3403F27D7B8F15CE /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				EA4D603D5D350EF1A7C6548E /* org */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		C965AFB8E210A664C3750A93 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				0D5144B4696B713B942850FA /* AllData.kt */,
+				57984EA9C11CD561DC7ABB9E /* Category.kt */,
+				484579303F1783095C49C58B /* CategoryItem.kt */,
+				3D6443FA4F6A701A0DC9F410 /* DateFormat.kt */,
+				60C5731652F13F241BC68E15 /* Favorite.kt */,
+				0AA08CD2701DD12422F6E549 /* Link.kt */,
+				F4659F623DEBB4EE32D1DF8F /* Question.kt */,
+				DA884553462734C30AB93E9D /* QuestionAnswer.kt */,
+				D6C3092558ADAF9FFEA6D09E /* Room.kt */,
+				22BF250952E084A0D8755619 /* Session.kt */,
+				D5054B21A3F46AFFBB494CB8 /* SessionModel.kt */,
+				9766981E58CB9E78F78F04AA /* SessionRating.kt */,
+				46865E50B914D0A0ED4059B9 /* SpeakerModel.kt */,
+				CD1DE815386C6BE3483A6F16 /* Vote.kt */,
+			);
+			name = cache;
+			sourceTree = "<group>";
+		};
+		D4AEDAB894C0406885C93A4E /* commonMain */ = {
+			isa = PBXGroup;
+			children = (
+				B9A55D4C3403F27D7B8F15CE /* kotlin */,
+			);
+			name = commonMain;
+			sourceTree = "<group>";
+		};
+		D61F4360A0BC1D91C2CF5822 /* macosX64Main */ = {
+			isa = PBXGroup;
+			children = (
+				FC90EA182213D51E329F4192 /* kotlin */,
+			);
+			name = macosX64Main;
+			sourceTree = "<group>";
+		};
+		E5D9CBD32850B2AA332BCDB8 /* dukecon */ = {
+			isa = PBXGroup;
+			children = (
+				99451C643D62C9FDDC2ADFFE /* DukeconApiTest.kt */,
+				F40DF33BDA0D8F726A7CCA7F /* date */,
+				695029B48B5DC7FBC3CBDDAB /* repository */,
+			);
+			name = dukecon;
+			sourceTree = "<group>";
+		};
+		EA2FDDF0CF64D78D747879AB /* org */ = {
+			isa = PBXGroup;
+			children = (
+				68CBBA3F62E4CEBFAB538563 /* dukecon */,
+			);
+			name = org;
+			sourceTree = "<group>";
+		};
+		EA4D603D5D350EF1A7C6548E /* org */ = {
+			isa = PBXGroup;
+			children = (
+				1575A9898DAF189C79248763 /* dukecon */,
+			);
+			name = org;
+			sourceTree = "<group>";
+		};
+		F40DF33BDA0D8F726A7CCA7F /* date */ = {
+			isa = PBXGroup;
+			children = (
+				9027108DD52DAB3F296CABA7 /* DateJvmTest.kt */,
+			);
+			name = date;
+			sourceTree = "<group>";
+		};
+		F94BA0679CCC647925B0F891 /* org */ = {
+			isa = PBXGroup;
+			children = (
+				1D8670EAD06E1611F9BC43B8 /* dukecon */,
+			);
+			name = org;
+			sourceTree = "<group>";
+		};
+		F96A8242D3BF6D88CFC84995 /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				772E6AEED227BC7420CC643F /* CommonDukeconApiTest.kt */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+		FC90EA182213D51E329F4192 /* kotlin */ = {
+			isa = PBXGroup;
+			children = (
+				EA2FDDF0CF64D78D747879AB /* org */,
+			);
+			name = kotlin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28E8A5102301DD22006C20B5 /* iosApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E8A5252301DD25006C20B5 /* Build configuration list for PBXNativeTarget "iosApp" */;
+			buildPhases = (
+				43A51D31059753E0B944EC98 /* [CP] Check Pods Manifest.lock */,
+				28E8A50D2301DD22006C20B5 /* Sources */,
+				28E8A50E2301DD22006C20B5 /* Frameworks */,
+				28E8A50F2301DD22006C20B5 /* Resources */,
+				58B0089F2FA61B4CFD2DF22A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iosApp;
+			productName = iosApp;
+			productReference = 28E8A5112301DD22006C20B5 /* iosApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28E8A5092301DD22006C20B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Michal Harakal";
+				TargetAttributes = {
+					28E8A5102301DD22006C20B5 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+				};
+			};
+			buildConfigurationList = 28E8A50C2301DD22006C20B5 /* Build configuration list for PBXProject "iosApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 28E8A5082301DD22006C20B5;
+			productRefGroup = 28E8A5122301DD22006C20B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28E8A5102301DD22006C20B5 /* iosApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28E8A50F2301DD22006C20B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E8A5212301DD25006C20B5 /* LaunchScreen.storyboard in Resources */,
+				28E8A51E2301DD25006C20B5 /* Assets.xcassets in Resources */,
+				28E8A51C2301DD22006C20B5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43A51D31059753E0B944EC98 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iosApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58B0089F2FA61B4CFD2DF22A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28E8A50D2301DD22006C20B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E8A5192301DD22006C20B5 /* SecondViewController.swift in Sources */,
+				28E8A5152301DD22006C20B5 /* AppDelegate.swift in Sources */,
+				2860136F2301F6FD0031D1ED /* ScheduleListCell.swift in Sources */,
+				286013732301FEDA0031D1ED /* Session.swift in Sources */,
+				28E8A5172301DD22006C20B5 /* FirstViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		28E8A51A2301DD22006C20B5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28E8A51B2301DD22006C20B5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		28E8A51F2301DD25006C20B5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28E8A5202301DD25006C20B5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		28E8A5232301DD25006C20B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		28E8A5242301DD25006C20B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		28E8A5262301DD25006C20B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D70C0053CC41885151C118 /* Pods-iosApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9242WKHB6U;
+				INFOPLIST_FILE = iosApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.dukecon.iosApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28E8A5272301DD25006C20B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44A5F2ACBE5E46ECE3851882 /* Pods-iosApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9242WKHB6U;
+				INFOPLIST_FILE = iosApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.dukecon.iosApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28E8A50C2301DD22006C20B5 /* Build configuration list for PBXProject "iosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E8A5232301DD25006C20B5 /* Debug */,
+				28E8A5242301DD25006C20B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E8A5252301DD25006C20B5 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E8A5262301DD25006C20B5 /* Debug */,
+				28E8A5272301DD25006C20B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28E8A5092301DD22006C20B5 /* Project object */;
+}
