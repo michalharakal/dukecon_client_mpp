@@ -1,0 +1,137 @@
+plugins {
+    id "io.spring.dependency-management"
+}
+
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'co.touchlab.kotlinxcodesync'
+apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
+
+apply from: "$rootDir/versions.gradle"
+
+archivesBaseName = 'dukecon'
+
+configurations {
+    compileClasspath
+}
+
+version = "1.0"
+
+kotlin {
+    jvm {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = '1.8'
+            }
+        }
+    }
+    targets {
+        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.macosX64, 'macos')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
+                               ? presets.iosArm64 : presets.iosX64
+
+        fromPreset(iOSTarget, 'ios') {
+            binaries {
+                framework(archivesBaseName)
+            }
+        }
+
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation project(':common:domain')
+                implementation project(':common:presentation')
+
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common"
+
+                implementation "io.ktor:ktor-client-core"
+                implementation "io.ktor:ktor-client-serialization"
+                implementation "io.ktor:ktor-client-logging"
+            }
+        }
+
+        jvmMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
+                implementation "io.ktor:ktor-client-core-jvm"
+                implementation "io.ktor:ktor-client-serialization-jvm"
+                implementation "io.ktor:ktor-client-logging-jvm"
+                implementation 'io.ktor:ktor-client-okhttp'
+            }
+        }
+
+        jvmTest {
+            dependencies {
+                implementation kotlin('test')
+                implementation kotlin('test-junit')
+            }
+        }
+
+        commonTest {
+            dependencies {
+                implementation kotlin('test-common')
+                implementation kotlin('test-annotations-common')
+                implementation "io.mockk:mockk:1.9.3"
+            }
+        }
+
+        macosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+
+                implementation "io.ktor:ktor-client-core-native"
+                implementation "io.ktor:ktor-client-serialization-native"
+                implementation "io.ktor:ktor-client-logging-native"
+
+            }
+        }
+
+        macosX64 {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+
+                implementation "io.ktor:ktor-client-core-native"
+                implementation "io.ktor:ktor-client-serialization-native"
+                implementation "io.ktor:ktor-client-logging-native"
+                implementation "io.ktor:ktor-client-curl"
+
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+
+                implementation "io.ktor:ktor-client-ios"
+                implementation "io.ktor:ktor-client-core-native"
+                implementation "io.ktor:ktor-client-json-native"
+                implementation "io.ktor:ktor-client-logging-native"
+                implementation "io.ktor:ktor-client-serialization-native"
+            }
+        }
+    }
+    macosX64 {
+        binaries {
+            executable {
+                entryPoint = "org.dukecon.main"
+            }
+        }
+    }
+
+    cocoapods {
+        // Configure fields required by CocoaPods.
+        summary = "Lots of Droidcon Stuff"
+        homepage = "https://github.com/touchlab/DroidconKotlin"
+    }
+}
+
+
+xcode {
+    projectPath = "../../iosApp/iosApp.xcodeproj"
+    target = "iosApp"
+}

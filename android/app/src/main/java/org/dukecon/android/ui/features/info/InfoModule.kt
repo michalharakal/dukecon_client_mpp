@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import org.dukecon.android.ui.injection.injectors.InfoPresenterInj
-import org.dukecon.data.repository.LibrariesListRepository
+import org.dukecon.domain.features.libraries.LibrariesListRepository
 import org.dukecon.domain.repository.LibrariesRepository
 import org.dukecon.presentation.feature.info.InfoContract
 import org.dukecon.presentation.feature.info.InfoPresenter

@@ -1,6 +1,6 @@
 package org.dukecon.presentation.feature.event
 
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
 import org.dukecon.presentation.BasePresenter
 import org.dukecon.presentation.BaseView
 import org.dukecon.presentation.model.EventView

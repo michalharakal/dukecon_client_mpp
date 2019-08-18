@@ -1,6 +1,6 @@
 package org.dukecon.presentation.model
 
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
 import org.dukecon.domain.model.Favorite
 
 data class EventView(val id: String,

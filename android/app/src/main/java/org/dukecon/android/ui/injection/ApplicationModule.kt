@@ -14,13 +14,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.dukecon.android.ui.features.login.DummyDukeconAuthManager
 import org.dukecon.android.ui.features.login.SettingsTokenStorage
-import org.dukecon.android.ui.utils.PlatformSettings
-import org.dukecon.common.data.DukeconDataKtorRepository
-import org.dukecon.data.cache.Settings
-import org.dukecon.data.mapper.*
-import org.dukecon.data.repository.EventRemote
-import org.dukecon.data.source.EventRemoteDataStore
+import org.dukecon.data.repository.DukeconDataKtorRepository
 import org.dukecon.domain.aspects.auth.AuthManager
+import org.dukecon.domain.aspects.storage.ApplicationStorage
 import org.dukecon.domain.aspects.twitter.TwitterLinks
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.domain.repository.ConferenceRepository
@@ -36,6 +32,8 @@ import kotlin.coroutines.CoroutineContext
 @Module
 open class ApplicationModule {
 
+    private val appStorage: ApplicationStorage = ApplicationStorage()
+
     @Provides
     fun provideContext(application: Application): Context {
         return application
@@ -48,11 +46,6 @@ open class ApplicationModule {
     }
 
     @Provides
-    internal fun provideEventMapper(): EventMapper {
-        return EventMapper()
-    }
-
-    @Provides
     fun provideSpeakerMapper(): org.dukecon.presentation.mapper.SpeakerMapper {
         return org.dukecon.presentation.mapper.SpeakerMapper()
     }
@@ -62,11 +55,11 @@ open class ApplicationModule {
         return org.dukecon.presentation.mapper.SpeakerDetailMapper(twitterLinks)
     }
 
-
     @Provides
     internal fun providePreEventMapper(speakersMapper: org.dukecon.presentation.mapper.SpeakerMapper): org.dukecon.presentation.mapper.EventMapper {
         return org.dukecon.presentation.mapper.EventMapper(speakersMapper)
     }
+
 
     class DO_NOT_VERIFY_IMP : javax.net.ssl.HostnameVerifier {
         override fun verify(p0: String?, p1: javax.net.ssl.SSLSession?): Boolean {
@@ -126,10 +119,13 @@ open class ApplicationModule {
     }
 
 
+    /*
     @Provides
     internal fun provideEventRemoteDataStore(eventRemote: EventRemote): EventRemoteDataStore {
         return EventRemoteDataStore(eventRemote)
     }
+
+*/
 
     @Provides
     internal fun provideioContextProvider(): IoContextProvider {
@@ -146,41 +142,21 @@ open class ApplicationModule {
 
 
     @Provides
-    internal fun provideKeycloakMapper(): KeycloakMapper {
-        return KeycloakMapper()
-    }
-
-    @Provides
-    internal fun provideFeedbackMapper(): FeedbackMapper {
-        return FeedbackMapper()
-    }
-
-    @Provides
-    internal fun provideFavoriteMapper(): FavoriteMapper {
-        return FavoriteMapper()
-    }
-
-    @Provides
-    internal fun provideMetaDateMapper(): MetaDateMapper {
-        return MetaDateMapper()
-    }
-
-
-    @Provides
     fun provideAuthManager(dukeconAuthManager: DummyDukeconAuthManager): AuthManager {
         return dukeconAuthManager
     }
 
     @Provides
     @Singleton
-    internal fun provideSettings(context: Context):Settings {
-        return PlatformSettings(context)
+    internal fun  provideApplicationStorage(): ApplicationStorage {
+        return appStorage
     }
+
 
     @Provides
     @Singleton
-    internal fun provideEventRepository(settings: Settings): ConferenceRepository {
-        return DukeconDataKtorRepository("", "", settings)
+    internal fun provideEventRepository(): ConferenceRepository {
+        return DukeconDataKtorRepository("", "", appStorage)
     }
 
     @Provides

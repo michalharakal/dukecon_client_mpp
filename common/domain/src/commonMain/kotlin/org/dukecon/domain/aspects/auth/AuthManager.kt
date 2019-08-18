@@ -5,5 +5,5 @@ import org.dukecon.domain.model.OAuthToken
 interface AuthManager {
     suspend fun login(activity: Any)
     suspend fun exchangeToken(code: String)
-    fun hasSession(token: OAuthToken): Boolean
+    fun hasSession(token: OAuthToken?): Boolean
 }

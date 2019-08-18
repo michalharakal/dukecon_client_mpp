@@ -28,14 +28,13 @@ open class SpeakerDetailPresenter constructor(
 
     override fun setSpeakerId(speakerId: String) {
         launch {
-            val speaker = conferenceRepository.getSpeaker(speakerId)
-            handleGetSpeakerSuccess(speaker)
+            conferenceRepository.getSpeaker(speakerId)?.let { speaker ->
+                handleGetSpeakerSuccess(speaker)
+            }
         }
     }
 
     private fun handleGetSpeakerSuccess(event: Speaker) {
-        this.view?.let {
-            it.showSpeaker(speakerDetailMapper.mapToView(event))
-        }
+        view?.showSpeaker(speakerDetailMapper.mapToView(event))
     }
 }

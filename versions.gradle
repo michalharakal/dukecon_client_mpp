@@ -24,30 +24,37 @@ dependencyManagement {
             dependency 'com.google.code.gson:gson:2.8.5'
             dependency 'com.google.android.material:material:1.0.0'
             dependency 'com.jakewharton.threetenabp:threetenabp:1.1.2'
-            dependency 'io.ktor:ktor-client-okhttp:1.2.2'
-            dependency 'io.ktor:ktor-client-json-jvm:1.2.2'
+            dependency 'io.ktor:ktor-client-okhttp:1.2.3'
+            dependency 'io.ktor:ktor-client-json-jvm:1.2.3'
             dependency 'com.google.dagger:dagger-compiler:2.22.1'
             dependency 'com.google.dagger:dagger-android-processor:2.22.1'
 
             dependency 'com.squareup.okhttp3:logging-interceptor:3.13.1'
             dependency 'com.squareup.retrofit2:retrofit:2.5.0'
             dependency 'com.squareup.retrofit2:converter-gson:2.5.0'
+            dependency 'com.squareup.picasso:picasso:2.71828'
+            dependency 'androidx.browser:browser:1.0.0'
 
             dependency 'org.jetbrains.kotlin:kotlin-stdlib:1.3.41'
             dependency "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41"
 
 
-            dependency "io.ktor:ktor-client-core:1.2.2"
-            dependency "io.ktor:ktor-client-json:1.2.2"
-            dependency "io.ktor:ktor-client-logging:1.2.2"
-            dependency "io.ktor:ktor-client-logging-jvm:1.2.2"
-            dependency "io.ktor:ktor-client-logging:1.2.2"
-            dependency "io.ktor:ktor-client-logging-native:1.2.2"
-
-            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.0-M2"
-            dependency 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-M2'
-            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.0-M2"
-
+            dependency "io.ktor:ktor-client-core:1.2.3"
+            dependency "io.ktor:ktor-client-core-native:1.2.3"
+            dependency "io.ktor:ktor-client-json:1.2.3"
+            dependency "io.ktor:ktor-client-logging:1.2.3"
+            dependency "io.ktor:ktor-client-logging-jvm:1.2.3"
+            dependency "io.ktor:ktor-client-logging:1.2.3"
+            dependency "io.ktor:ktor-client-logging-native:1.2.3"
+            dependency 'io.ktor:ktor-client-serialization-jvm:1.2.3'
+            dependency 'io.ktor:ktor-client-serialization:1.2.3'
+            dependency 'io.ktor:ktor-client-serialization-native:1.2.3'
+            dependency 'io.ktor:ktor-client-android:1.2.3'
+            dependency "io.ktor:ktor-client-ios:1.2.3"
+            dependency "io.ktor:ktor-client-core-ios:1.2.3"
+            dependency "io.ktor:ktor-client-json-ios:1.2.3"
+            dependency "io.ktor:ktor-client-curl:1.2.3"
+            dependency "io.ktor:ktor-client-json-native:1.2.3"
 
             dependency 'commons-net:commons-net:3.6'
             dependency 'com.google.dagger:dagger-android-support:2.22.1'
@@ -59,13 +66,13 @@ dependencyManagement {
             dependency 'org.greenrobot:eventbus-annotation-processor:3.1.1'
             dependency 'commons-net:commons-net:3.6'
 
+            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.0-RC2"
+            dependency 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-RC2'
+            dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.0-RC2"
+            dependency 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0-RC2'
+            // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
+            dependency group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-android', version: '1.3.0-RC2'
 
-
-
-            dependency "io.ktor:ktor-client-ios:1.2.2"
-            dependency "io.ktor:ktor-client-logging-native:1.2.2"
-            dependency "io.ktor:ktor-client-core-native:1.2.2"
-            dependency "io.ktor:ktor-client-json-native:1.2.2"
 
             dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.1"
             dependency "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.11.1"
@@ -84,7 +91,7 @@ dependencyManagement {
             dependency 'org.json:json:20180813'
             dependency 'io.swagger:swagger-annotations:1.5.21'
             dependency 'commons-io:commons-io:2.6'
-            dependency 'androidx.test:rules:1.3.0-alpha01'
+            dependency 'androidx.test:rules:1.3.0-alpha02'
         }
     }
 }

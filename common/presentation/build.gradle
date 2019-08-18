@@ -1,96 +1,96 @@
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
+apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
 apply plugin: 'co.touchlab.kotlinxcodesync'
 apply plugin: 'io.spring.dependency-management'
+
 apply from: "$rootDir/versions.gradle"
 
+archivesBaseName = 'presentation'
 
-archivesBaseName = 'common-presentation'
-
-// TODO work around https://youtrack.jetbrains.com/issue/KT-27170
 configurations {
     compileClasspath
 }
 
+version = "1.0"
+
 kotlin {
-    sourceSets {
-        commonMain {
-            dependencies {
-                api project(':common:domain')
-                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common"
-
-                implementation "io.ktor:ktor-client-core"
-                implementation "io.ktor:ktor-client-json"
-                implementation "io.ktor:ktor-client-logging"
-            }
-        }
-        jvmMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-common'
-                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
-
-                implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime'
-
-                implementation 'io.ktor:ktor-client-core-jvm'
-                implementation 'io.ktor:ktor-client-json-jvm'
-                implementation 'io.ktor:ktor-client-logging-jvm'
-            }
-        }
-
-        iosMain {
-            dependencies {
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native"
-                implementation 'io.ktor:ktor-client-core-native'
-                implementation 'io.ktor:ktor-client-json-native'
-                implementation 'io.ktor:ktor-client-logging-native'
+    jvm {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = '1.8'
             }
         }
     }
-
     targets {
         fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.macosX64, 'macos')
 
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
                                ? presets.iosArm64 : presets.iosX64
 
         fromPreset(iOSTarget, 'ios') {
             binaries {
-                framework {
-                    // Use "marker" to embed the bitcode marker (for debug builds).
-                    // Use "disable" to disable embedding.
-                    embedBitcode "bitcode" // for release binaries.
-                }
+                framework(archivesBaseName)
+            }
+        }
+
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation project(':common:domain')
+
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common"
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation kotlin('test-common')
+                implementation kotlin('test-annotations-common')
+                implementation "io.mockk:mockk:1.9.3"
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation kotlin('test')
+                implementation kotlin('test-junit')
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+            }
+        }
+        macosMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
+            }
+        }
+
+        macosX64 {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native"
             }
         }
     }
-}
-
-
-task packForXCode(type: Sync) {
-    final File frameworkDir = new File(buildDir, "xcode-frameworks")
-    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
-    final def framework = kotlin.targets.ios.binaries.getFramework("", mode)
-
-    inputs.property "mode", mode
-    dependsOn framework.linkTask
-
-    from { framework.outputFile.parentFile }
-    into frameworkDir
-
-    doLast {
-        new File(frameworkDir, 'gradlew').with {
-            text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
-            setExecutable(true)
-        }
+    cocoapods {
+        // Configure fields required by CocoaPods.
+        summary = "Lots of Droidcon Stuff"
+        homepage = "https://github.com/touchlab/DroidconKotlin"
     }
-}
 
-tasks.build.dependsOn packForXCode
+}
 
 xcode {
-    projectPath = "${project.rootDir}/ios/Test/Test.xcodeproj"
-    target = "Test"
+    projectPath = "../../iosApp/iosApp.xcodeproj"
+    target = "iosApp"
 }

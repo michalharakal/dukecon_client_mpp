@@ -3,7 +3,8 @@ rootProject.name = 'dukecon-mobile-mpp'
 enableFeaturePreview('GRADLE_METADATA')
 
 include ':common:domain'
-include ':common:data'
 include ':common:presentation'
-include ':common:repository'
+include ':common:dukecon'
+include ':common:apachecon'
 include ':android:app'
+

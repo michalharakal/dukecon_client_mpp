@@ -1,6 +1,6 @@
 package org.dukecon.domain.repository
 
-import io.ktor.util.date.GMTDate
+import org.dukecon.date.GMTDate
 import org.dukecon.domain.model.*
 
 /**
@@ -11,21 +11,24 @@ import org.dukecon.domain.model.*
 interface ConferenceRepository {
     var onRefreshListeners: List<() -> Unit>
 
-    suspend fun update()
+    fun update(completion: (String) -> Unit)
 
+    fun getEvents(): List<Event>
+
+    suspend fun update()
     suspend fun saveEvents(events: List<Event>)
 
     suspend fun getEvents(day: Int): List<Event>
     suspend fun getEventDates(): List<GMTDate>
 
     suspend fun getSpeakers(): List<Speaker>
-    suspend fun getSpeaker(id: String): Speaker
+    suspend fun getSpeaker(id: String): Speaker?
     suspend fun saveSpeakers(speakers: List<Speaker>)
 
     suspend fun getRooms(): List<Room>
     suspend fun saveRooms(rooms: List<Room>)
 
-    suspend fun getEvent(id: String): Event
+    suspend fun getEvent(id: String): Event?
 
     suspend fun saveFavorite(favorite: Favorite): List<Favorite>
     suspend fun getFavorites(): List<Favorite>

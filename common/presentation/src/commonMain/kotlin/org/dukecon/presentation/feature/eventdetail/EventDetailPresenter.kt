@@ -19,7 +19,7 @@ open class EventDetailPresenter constructor(
         private val speakerMapper: SpeakerMapper,
         private val eventsMapper: EventMapper,
         private val authManager: AuthManager,
-        ioContextProvider:IoContextProvider
+        ioContextProvider: IoContextProvider
 ) : CoroutinePresenter<EventDetailContract.View>(ioContextProvider), EventDetailContract.Presenter {
 
     override fun showError(error: Throwable) {
@@ -55,8 +55,9 @@ open class EventDetailPresenter constructor(
     override fun setSessionId(sessionId: String) {
         this.sessionId = sessionId
         launch {
-            val session = conferenceRepository.getEvent(sessionId)
-            handleGetEventSuccess(session)
+            conferenceRepository.getEvent(sessionId)?.let { event ->
+                handleGetEventSuccess(event)
+            }
         }
     }
 
